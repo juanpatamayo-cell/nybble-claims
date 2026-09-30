@@ -1,3 +1,6 @@
 body {
   margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family-body), system-ui, sans-serif;
 }
