@@ -1,0 +1,29 @@
+name: Tokens
+
+# Runs on every push and pull request that touches tokens or the build script.
+# It rebuilds the CSS from tokens/figma and fails if the committed build/ folder is out of date,
+# so what's in the repo always matches what's in Figma.
+on:
+  push:
+    paths: ['tokens/**', 'scripts/**', 'package*.json', '.github/workflows/tokens.yml']
+  pull_request:
+    paths: ['tokens/**', 'scripts/**', 'package*.json', '.github/workflows/tokens.yml']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run tokens
+      - name: Check build/ is up to date
+        run: |
+          if ! git diff --quiet -- build; then
+            echo "::error::build/ is out of date. Run 'npm run tokens' locally and commit the result."
+            git diff --stat -- build
+            exit 1
+          fi

@@ -1,0 +1,48 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+[data-theme="dark"] {
+  --text-primary: var(--color-gray-50);
+  --text-secondary: var(--color-gray-300);
+  --text-tertiary: var(--color-gray-400);
+  --text-placeholder: var(--color-gray-500);
+  --text-disabled: var(--color-gray-600);
+  --text-brand: var(--color-brand-300);
+  --text-error: var(--color-red-400);
+  --text-warning: var(--color-orange-400);
+  --text-success: var(--color-green-400);
+  --text-info: var(--color-blue-400);
+  --text-on-brand: var(--color-base-white);
+  --text-inverse: var(--color-gray-900);
+  --bg-primary: var(--color-gray-950);
+  --bg-secondary: var(--color-gray-900);
+  --bg-tertiary: var(--color-gray-800);
+  --bg-disabled: var(--color-gray-800);
+  --bg-overlay: var(--color-base-black);
+  --bg-brand-solid: var(--color-brand-600);
+  --bg-brand-solid-hover: var(--color-brand-500);
+  --bg-brand-subtle: var(--color-brand-950);
+  --bg-error-solid: var(--color-red-600);
+  --bg-error-subtle: var(--color-red-950);
+  --bg-warning-subtle: var(--color-orange-950);
+  --bg-success-subtle: var(--color-green-950);
+  --bg-info-subtle: var(--color-blue-950);
+  --border-primary: var(--color-gray-700);
+  --border-secondary: var(--color-gray-800);
+  --border-disabled: var(--color-gray-800);
+  --border-brand: var(--color-brand-400);
+  --border-focus: var(--color-brand-400);
+  --border-error: var(--color-red-400);
+  --border-warning: var(--color-orange-400);
+  --border-success: var(--color-green-400);
+  --fg-primary: var(--color-base-white);
+  --fg-secondary: var(--color-gray-400);
+  --fg-disabled: var(--color-gray-600);
+  --fg-brand: var(--color-brand-400);
+  --fg-error: var(--color-red-400);
+  --fg-warning: var(--color-orange-400);
+  --fg-success: var(--color-green-400);
+  --fg-info: var(--color-blue-400);
+  --fg-on-brand: var(--color-base-white);
+}

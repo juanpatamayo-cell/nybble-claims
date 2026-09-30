@@ -1,0 +1,120 @@
+{
+  "font-family": {
+    "body": {
+      "$type": "fontFamily",
+      "$value": "Inter"
+    }
+  },
+  "font-weight": {
+    "regular": {
+      "$type": "fontWeight",
+      "$value": 400
+    },
+    "medium": {
+      "$type": "fontWeight",
+      "$value": 500
+    },
+    "semibold": {
+      "$type": "fontWeight",
+      "$value": 600
+    },
+    "bold": {
+      "$type": "fontWeight",
+      "$value": 700
+    }
+  },
+  "font-size": {
+    "display-lg": {
+      "$type": "dimension",
+      "$value": "48px"
+    },
+    "display-md": {
+      "$type": "dimension",
+      "$value": "36px"
+    },
+    "display-sm": {
+      "$type": "dimension",
+      "$value": "30px"
+    },
+    "display-xs": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "text-xl": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "text-lg": {
+      "$type": "dimension",
+      "$value": "18px"
+    },
+    "text-md": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "text-sm": {
+      "$type": "dimension",
+      "$value": "14px"
+    },
+    "text-xs": {
+      "$type": "dimension",
+      "$value": "12px"
+    }
+  },
+  "line-height": {
+    "display-lg": {
+      "$type": "dimension",
+      "$value": "60px"
+    },
+    "display-md": {
+      "$type": "dimension",
+      "$value": "44px"
+    },
+    "display-sm": {
+      "$type": "dimension",
+      "$value": "38px"
+    },
+    "display-xs": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "text-xl": {
+      "$type": "dimension",
+      "$value": "30px"
+    },
+    "text-lg": {
+      "$type": "dimension",
+      "$value": "28px"
+    },
+    "text-md": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "text-sm": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "text-xs": {
+      "$type": "dimension",
+      "$value": "18px"
+    }
+  },
+  "size": {
+    "touch-target": {
+      "$type": "dimension",
+      "$value": "48px"
+    },
+    "icon-sm": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "icon-md": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "icon-lg": {
+      "$type": "dimension",
+      "$value": "24px"
+    }
+  }
+}
