@@ -1,3 +1,14 @@
+:root {
+  /* Tells the browser this page manages its own light/dark styling via
+     [data-theme], so it doesn't force-invert colors when the OS/browser
+     prefers dark - our tokens, not a UA heuristic, decide the palette. */
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
   background: var(--bg-primary);
