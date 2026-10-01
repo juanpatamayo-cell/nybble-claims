@@ -47,7 +47,9 @@ Naming: the Figma variable path maps 1:1 to the CSS variable (`text/primary` →
 
 - **Colors: semantic tokens only** (`--text-*`, `--bg-*`, `--border-*`, `--fg-*`). Never use `--color-gray-700` etc. in components: primitives don't change in dark mode, so the component would break there.
   - `--fg-*` is for icons and non-text graphics; `--text-*` is for text.
+  - `color/gray/*` is a warm neutral ramp (cream, not cold gray) — matches the Fi/Expensify look-and-feel direction. Don't reintroduce a pure achromatic gray; if a new neutral is needed, keep the same warm undertone.
 - **Spacing / radius**: primitives are the intended API (`--spacing-16`, `--radius-md`). The number is the pixel value on the 4px scale (0, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96).
+  - Card-shaped surfaces (Document card, Estimate card, Claim card) use `--radius-2xl` (16px), not `--radius-xl` (12px) — a deliberate departure from whatever `radius-xl` is used for elsewhere, to match the rounder cards in the Fi/Expensify reference apps. New card-like components should follow `--radius-2xl` too.
 - **Type**: `--font-size-{display-lg…display-xs | text-xl…text-xs}` paired with the matching `--line-height-*`, plus `--font-weight-{regular|medium|semibold|bold}` and `--font-family-body`.
 - **Sizing**: `--size-touch-target` (48 → 56px in large text), `--size-icon-{sm|md|lg}`.
 
