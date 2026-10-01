@@ -66,7 +66,7 @@ Naming: the Figma variable path maps 1:1 to the CSS variable (`text/primary` →
 ```
 
 Gotchas:
-- `--font-family-body` is emitted unquoted with no fallback (`Inter`). Always add a fallback in the consuming declaration (`var(--font-family-body), system-ui, sans-serif`). Inter isn't loaded anywhere yet, so the page that uses the components has to load it.
+- `--font-family-body` is `'Inter Tight'` (quoted by the build, since the family name has a space). Always add a fallback in the consuming declaration (`var(--font-family-body), system-ui, sans-serif`). The page that uses the components has to load the font itself — the React app does this in `src/main.tsx` via `@fontsource/inter-tight`.
 - There are no composite text styles in the build. Figma text styles have to be rebuilt from the size, line-height and weight variables.
 - 1px borders and `0` aren't tokens; hardcoding `1px` border width is fine.
 - `--bg-overlay` is pure black; apply opacity in the component (e.g. `opacity` or `color-mix`), don't add a new color.

@@ -8,12 +8,12 @@ import '../build/css/tokens.css';
 import '../build/css/theme-dark.css';
 import '../build/css/text-large.css';
 
-// Inter, with the weights the type tokens use (--font-weight-regular|medium|semibold|bold).
-// --font-family-body ships with no fallback, so every consumer must load Inter itself.
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/600.css';
-import '@fontsource/inter/700.css';
+// Inter Tight, with the weights the type tokens use (--font-weight-regular|medium|semibold|bold).
+// --font-family-body ships with no fallback, so every consumer must load the font itself.
+import '@fontsource/inter-tight/400.css';
+import '@fontsource/inter-tight/500.css';
+import '@fontsource/inter-tight/600.css';
+import '@fontsource/inter-tight/700.css';
 
 import './styles/global.css';
 

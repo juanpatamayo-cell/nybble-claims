@@ -2,7 +2,7 @@
   "font-family": {
     "body": {
       "$type": "fontFamily",
-      "$value": "Inter"
+      "$value": "Inter Tight"
     }
   },
   "font-weight": {
