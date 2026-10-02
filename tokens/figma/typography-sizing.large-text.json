@@ -2,7 +2,11 @@
   "font-family": {
     "body": {
       "$type": "fontFamily",
-      "$value": "Inter"
+      "$value": "Inter Tight"
+    },
+    "display": {
+      "$type": "fontFamily",
+      "$value": "Fraunces"
     }
   },
   "font-weight": {
