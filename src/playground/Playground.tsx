@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DocumentCard, ValidationMessage } from '../components';
+import { ClaimStatusStepper, DocumentCard, ValidationMessage } from '../components';
 
 type Theme = 'light' | 'dark';
 type TextSize = 'default' | 'large';
@@ -129,6 +129,39 @@ export function Playground() {
           title="No action needed right now"
           description="showAction is false here — the component works without a link too."
           showAction={false}
+        />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-24)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <ClaimStatusStepper status="in-review" receivedAt="Sep 12 · 10:24 AM" decisionExpected="Expected by Sep 15" />
+        <ClaimStatusStepper
+          status="action-required"
+          receivedAt="Sep 12 · 10:24 AM"
+          actionMessage="The invoice photo is blurry. Upload a clearer one to keep your claim moving."
+        />
+        <ClaimStatusStepper
+          status="approved"
+          receivedAt="Sep 12 · 10:24 AM"
+          reviewedAt="Sep 13"
+          approvedAmount="$96.00"
+          approvedAt="Sep 14 · See breakdown"
+          paymentEta="Arrives by Sep 18"
+        />
+        <ClaimStatusStepper
+          status="paid"
+          receivedAt="Sep 12 · 10:24 AM"
+          reviewedAt="Sep 13"
+          approvedAmount="$96.00"
+          approvedAt="Sep 14"
+          paymentDetail="$96.00 to account ••••4521 · Sep 16"
         />
       </div>
     </div>
