@@ -2,3 +2,7 @@ node_modules/
 .DS_Store
 dist/
 *.tsbuildinfo
+
+# Local tool config — personal to each contributor's machine
+.claude/settings.local.json
+.codex/

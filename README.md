@@ -1,8 +1,14 @@
 # nybble-claims
 
-Design tokens (and, soon, components) for the **pet insurance reimbursement flow** designed for the nybblegroup UX challenge.
+Design tokens and React components for the **pet insurance reimbursement flow** designed for the nybblegroup UX challenge.
 
-The source of truth is the Figma library **nybblegroup UX challenge – Library**. Its variables are exported to `tokens/figma/` and turned into CSS variables with [Style Dictionary](https://styledictionary.com).
+The source of truth is the Figma library **nybblegroup UX challenge – Library**. Its variables are exported to `tokens/figma/` and turned into CSS variables with [Style Dictionary](https://styledictionary.com); components are built in React to match it 1:1.
+
+Full contributor conventions (prop mapping, icon rules, Figma MCP workflow) live in [CLAUDE.md](./CLAUDE.md) — this file is the overview.
+
+## Stack
+
+React 19 + Vite + TypeScript, CSS Modules for component styles, [Fraunces](https://fonts.google.com/specimen/Fraunces) for display type and [Inter Tight](https://fonts.google.com/specimen/Inter+Tight) for body/UI, a warm cream-toned palette (Fi/Expensify-inspired, not a default gray system). Icons are [lucide-react](https://lucide.dev) for components built before the icon refresh, and Streamline Flex (exported as SVG) for everything after it — see CLAUDE.md's "Icons" section for which is which.
 
 ## Structure
 
@@ -19,13 +25,20 @@ build/css/                       ← generated, committed
   theme-dark.css                   [data-theme="dark"]
   text-large.css                   [data-text-size="large"]
 build/json/tokens.json           ← flat JSON (for JS / React Native)
+src/
+  components/<Name>/               One folder per component (.tsx, .module.css, index.ts)
+  playground/                      Playground.tsx — every component/variant, for manual QA
+  assets/                          Illustrations and exported icons
+  main.tsx                         Loads token stylesheets + fonts, mounts the playground
 ```
 
 ## Usage
 
 ```bash
 npm install
-npm run tokens
+npm run tokens   # rebuild build/css + build/json from tokens/figma
+npm run dev      # playground at localhost:5173
+npm run build    # typecheck + production build
 ```
 
 ```html
@@ -51,9 +64,25 @@ Token names match the code syntax set on every Figma variable (`text/primary` �
 
 The **Tokens** GitHub Action rebuilds on every push/PR and fails if `build/` doesn't match the tokens.
 
+## Components
+
+One component per branch (`feat/<component-name>`), one PR each, same shape as `DocumentCard` — see CLAUDE.md for the prop-mapping and token rules every component follows.
+
+| Component | Status |
+|---|---|
+| DocumentCard | ✅ shipped |
+| ValidationMessage | planned |
+| EstimateCard | planned |
+| ClaimStatusStepper | planned |
+| PetSelector | planned |
+| CameraModule | planned |
+
 ## Roadmap
 
-- [x] Tokens exported from Figma → CSS variables
-- [ ] Components in React: DocumentCard, ValidationMessage, EstimateCard, ClaimStatusStepper
-- [ ] Storybook published on GitHub Pages
-- [ ] Code Connect between Figma components and code
+- [x] **M0** — docs cleanup (this file, CLAUDE.md, repo hygiene)
+- [ ] **M1** — tokens re-export / sync check
+- [ ] **M2** — remaining components (table above)
+- [ ] **M3** — Storybook published on GitHub Pages
+- [ ] **M4** — iterate on design-review feedback
+- [ ] **v0.1** — tag once M2 lands (full component set)
+- [ ] **v1.0** — tag once M3 + M4 land (published, documented, reviewed)
