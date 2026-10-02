@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DocumentCard } from '../components';
+import { DocumentCard, ValidationMessage } from '../components';
 
 type Theme = 'light' | 'dark';
 type TextSize = 'default' | 'large';
@@ -84,6 +84,51 @@ export function Playground() {
           title="Invoice"
           errorMessage="The photo is blurry, so we can't read the amount."
           onRetake={() => console.log('retake')}
+        />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-16)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <ValidationMessage
+          type="info"
+          title="We read your invoice"
+          description="Check the details below. You can edit anything we got wrong."
+          actionLabel="Review details"
+          onAction={() => console.log('review details')}
+        />
+        <ValidationMessage
+          type="success"
+          title="All documents verified"
+          description="Invoice and proof of payment are ready. You can continue."
+          actionLabel="Continue"
+          onAction={() => console.log('continue')}
+        />
+        <ValidationMessage
+          type="warning"
+          title="Proof of payment missing"
+          description="Add a receipt or bank statement showing you paid the vet."
+          actionLabel="Add proof of payment"
+          onAction={() => console.log('add proof of payment')}
+        />
+        <ValidationMessage
+          type="error"
+          title="This looks like a quote"
+          description="We need the final invoice from your vet, not an estimate."
+          actionLabel="Upload invoice"
+          onAction={() => console.log('upload invoice')}
+        />
+        <ValidationMessage
+          type="info"
+          title="No action needed right now"
+          description="showAction is false here — the component works without a link too."
+          showAction={false}
         />
       </div>
     </div>
