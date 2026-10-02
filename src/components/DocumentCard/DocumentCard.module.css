@@ -234,7 +234,10 @@
   /* Figma's 18px/10px padding on this button isn't on the 4px spacing
      scale (nothing binds it), so the nearest tokens are used instead. */
   padding: var(--spacing-8) var(--spacing-16);
-  border-radius: var(--radius-md);
+  /* Was --radius-md; re-checked against Figma and this button now binds
+     --radius-4xl (pill, post button-redesign) — the DocumentCard code
+     predated that change and never got synced. */
+  border-radius: var(--radius-4xl);
   border: 1px solid var(--border-primary);
   background: var(--bg-primary);
   /* No elevation/shadow tier exists in the token system; hardcoded like
