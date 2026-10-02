@@ -1,0 +1,204 @@
+.card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: var(--spacing-16);
+  background: var(--bg-brand-subtle);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-2xl);
+}
+
+.card--full {
+  gap: var(--spacing-16);
+}
+
+.card--compact {
+  gap: var(--spacing-4);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  width: 100%;
+}
+
+.label {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-brand);
+}
+
+.amount--full {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-display-md);
+  line-height: var(--line-height-display-md);
+  /* Figma: -2% tracking on this style. No letter-spacing token exists, so
+     this is hardcoded — in em so it still scales with large text mode. */
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.amount--compact {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-display-xs);
+  line-height: var(--line-height-display-xs);
+  color: var(--text-primary);
+}
+
+.subtext {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-tertiary);
+}
+
+.breakdown {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  padding: var(--spacing-16);
+  /* Figma's gap here is an unbound 10px, not on the 4px spacing scale.
+     Nearest token used instead — flag in the Figma library if it should
+     snap to one side or the other. */
+  gap: var(--spacing-8);
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 100%;
+}
+
+.rowLabel {
+  display: flex;
+  flex: 1 1 0%;
+  align-items: center;
+  gap: var(--spacing-4);
+  min-width: 0;
+}
+
+.rowLabelText {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-secondary);
+}
+
+/*
+ * Not sized to --size-touch-target on purpose: this sits inline in a dense
+ * breakdown row (~20px line height) and is a secondary disclosure, not a
+ * primary action — a 48px hit area would stretch every row and break the
+ * list rhythm the design calls for. Flagging the deviation from the usual
+ * touch-target rule rather than silently shrinking a primary control.
+ */
+.infoButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--fg-secondary);
+  cursor: pointer;
+}
+
+.infoButton svg {
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+}
+
+.infoButton:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.rowValue {
+  margin: 0;
+  flex-shrink: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-primary);
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border-secondary);
+}
+
+.totalRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 100%;
+}
+
+.totalLabel {
+  margin: 0;
+  flex: 1 1 0%;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-text-md);
+  line-height: var(--line-height-text-md);
+  color: var(--text-primary);
+}
+
+.totalValue {
+  margin: 0;
+  flex-shrink: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-text-md);
+  line-height: var(--line-height-text-md);
+  color: var(--text-primary);
+}
+
+.footnote {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-6);
+  width: 100%;
+}
+
+.footnoteIcon {
+  flex-shrink: 0;
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  color: var(--fg-secondary);
+}
+
+.footnoteText {
+  margin: 0;
+  flex: 1 1 0%;
+  min-width: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-xs);
+  line-height: var(--line-height-text-xs);
+  color: var(--text-tertiary);
+}
