@@ -48,7 +48,9 @@ Naming: the Figma variable path maps 1:1 to the CSS variable (`text/primary` →
 - **Colors: semantic tokens only** (`--text-*`, `--bg-*`, `--border-*`, `--fg-*`). Never use `--color-gray-700` etc. in components: primitives don't change in dark mode, so the component would break there.
   - `--fg-*` is for icons and non-text graphics; `--text-*` is for text.
 - **Spacing / radius**: primitives are the intended API (`--spacing-16`, `--radius-md`). The number is the pixel value on the 4px scale (0, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96).
-- **Type**: `--font-size-{display-lg…display-xs | text-xl…text-xs}` paired with the matching `--line-height-*`, plus `--font-weight-{regular|medium|semibold|bold}` and `--font-family-body`.
+- **Type**: `--font-size-{display-lg…display-xs | text-xl…text-xs}` paired with the matching `--line-height-*`, plus `--font-weight-{regular|medium|semibold|bold}` and two typeface tokens:
+  - `--font-family-body` — all UI and body text, every component. Currently `Inter`; moving to `Inter Tight` to match the onboarding research report's pairing (tracked, not done yet — see Gotchas).
+  - `--font-family-display` — `Fraunces`. Headline moments only (greetings, success states, empty states), never body text or dense UI. Pairs with `--font-family-body` the same way the research report pairs Fraunces with Inter Tight.
 - **Sizing**: `--size-touch-target` (48 → 56px in large text), `--size-icon-{sm|md|lg}`.
 
 ```css
@@ -63,10 +65,16 @@ Naming: the Figma variable path maps 1:1 to the CSS variable (`text/primary` →
   font: var(--font-weight-semibold) var(--font-size-text-lg) / var(--line-height-text-lg) var(--font-family-body), sans-serif;
   color: var(--text-primary);
 }
+.outcome__headline {
+  /* A headline moment (e.g. "Reimbursement sent") — font-family-display, not -body. */
+  font: var(--font-weight-semibold) var(--font-size-display-xs) / var(--line-height-display-xs) var(--font-family-display), Georgia, serif;
+  color: var(--text-primary);
+}
 ```
 
 Gotchas:
-- `--font-family-body` is emitted unquoted with no fallback (`Inter`). Always add a fallback in the consuming declaration (`var(--font-family-body), system-ui, sans-serif`). Inter isn't loaded anywhere yet, so the page that uses the components has to load it.
+- `--font-family-body` and `--font-family-display` are emitted unquoted with no fallback. Always add a fallback in the consuming declaration (`var(--font-family-body), system-ui, sans-serif` / `var(--font-family-display), Georgia, serif`). The consuming page has to load both font families itself (the React app does this in `src/main.tsx` via `@fontsource/*`).
+- `--font-family-body` is still `Inter` in the built CSS as of this writing. The Figma variable needs to become `Inter Tight` (tracked), but the Figma plugin bridge used to edit tokens in this repo can't load that family in its own sandbox (`figma.loadFontAsync` fails for every weight except Regular, which only works by an unexplained fluke) — the fix has to be made by hand in Figma's own Variables panel (`font-family/body`, both Default and Large text modes), then re-exported into `tokens/figma/typography-sizing.default.json` and rebuilt. `--font-family-display` (`Fraunces`) went in through the normal automated path without this problem.
 - There are no composite text styles in the build. Figma text styles have to be rebuilt from the size, line-height and weight variables.
 - 1px borders and `0` aren't tokens; hardcoding `1px` border width is fine.
 - `--bg-overlay` is pure black; apply opacity in the component (e.g. `opacity` or `color-mix`), don't add a new color.

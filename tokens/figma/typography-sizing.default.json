@@ -3,6 +3,10 @@
     "body": {
       "$type": "fontFamily",
       "$value": "Inter"
+    },
+    "display": {
+      "$type": "fontFamily",
+      "$value": "Fraunces"
     }
   },
   "font-weight": {
