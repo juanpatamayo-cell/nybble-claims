@@ -15,6 +15,12 @@ import '@fontsource/inter-tight/500.css';
 import '@fontsource/inter-tight/600.css';
 import '@fontsource/inter-tight/700.css';
 
+// Fraunces, for --font-family-display (headline moments only: greetings, success, empty
+// states — never body text or dense UI). Weights match the research report's own pairing.
+import '@fontsource/fraunces/400.css';
+import '@fontsource/fraunces/600.css';
+import '@fontsource/fraunces/700.css';
+
 import './styles/global.css';
 
 createRoot(document.getElementById('root')!).render(

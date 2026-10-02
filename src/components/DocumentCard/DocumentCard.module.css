@@ -1,0 +1,296 @@
+.card {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  width: 100%;
+  min-height: var(--size-touch-target);
+  padding: var(--spacing-16) var(--spacing-8) var(--spacing-16) var(--spacing-16);
+  border-radius: var(--radius-2xl);
+}
+
+.card--empty {
+  background: var(--bg-secondary);
+  border: 1.5px dashed var(--border-primary);
+}
+
+.card--uploading,
+.card--analyzing {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-secondary);
+}
+
+.card--valid {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-success);
+}
+
+.card--error {
+  background: var(--bg-error-subtle);
+  border: 1px solid var(--border-error);
+  align-items: flex-start;
+}
+
+/* Empty-state icon container */
+.iconCircle {
+  flex-shrink: 0;
+  width: var(--spacing-48);
+  height: var(--spacing-48);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--bg-brand-subtle);
+}
+
+.iconCircle svg {
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  color: var(--fg-brand);
+}
+
+/* Uploading / Analyzing / Valid / Error thumbnail */
+.thumbnail {
+  flex-shrink: 0;
+  width: var(--spacing-48);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tertiary);
+}
+
+.thumbnail svg {
+  width: var(--size-icon-md);
+  height: var(--size-icon-md);
+  color: var(--fg-secondary);
+}
+
+.body {
+  flex: 1 1 0%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  overflow: hidden;
+  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-text-md);
+  line-height: var(--line-height-text-md);
+  color: var(--text-primary);
+}
+
+.badge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-2) var(--spacing-8);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-xs);
+  line-height: var(--line-height-text-xs);
+  white-space: nowrap;
+}
+
+.badge--required {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.badge--verified {
+  padding-left: var(--spacing-6);
+  background: var(--bg-success-subtle);
+  color: var(--text-success);
+}
+
+.badge--verified svg {
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  color: var(--fg-success);
+}
+
+/* Shared body copy: description / file name / detail */
+.bodyText {
+  margin: 0;
+  width: 100%;
+  overflow-wrap: break-word;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-tertiary);
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 100%;
+}
+
+.progressTrack {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: var(--spacing-8);
+  overflow: hidden;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+}
+
+.progressBar {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--bg-brand-solid);
+}
+
+.progressLabel {
+  flex-shrink: 0;
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-xs);
+  line-height: var(--line-height-text-xs);
+  color: var(--text-secondary);
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.statusRow svg {
+  flex-shrink: 0;
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  color: var(--fg-brand);
+  animation: spin 1s linear infinite;
+}
+
+.statusText {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-brand);
+}
+
+.messageRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-6);
+  width: 100%;
+}
+
+.messageRow svg {
+  flex-shrink: 0;
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  color: var(--fg-error);
+}
+
+.messageText {
+  flex: 1 1 0%;
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: break-word;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-error);
+}
+
+/* Figma binds this button's fill/border/text to unbound primitive variables
+   (color/base/white, color/gray/300, color/gray/700) instead of semantic
+   tokens. They resolve to the same values as --bg-primary, --border-primary
+   and --text-secondary, so those are used here — flag this in the Figma
+   library so get_variable_defs resolves it directly next time. */
+.retakeButton {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--size-touch-target);
+  /* Figma's 18px/10px padding on this button isn't on the 4px spacing
+     scale (nothing binds it), so the nearest tokens are used instead. */
+  padding: var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-primary);
+  background: var(--bg-primary);
+  /* No elevation/shadow tier exists in the token system; hardcoded like
+     the documented 1px-border gotcha. */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-text-md);
+  line-height: var(--line-height-text-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+/* Icon-only action buttons: Add (empty), Cancel (uploading), Remove (valid) */
+.iconButton {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--size-touch-target);
+  min-height: var(--size-touch-target);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--fg-secondary);
+  cursor: pointer;
+}
+
+.iconButton svg {
+  width: var(--size-icon-md);
+  height: var(--size-icon-md);
+}
+
+.iconButton--add {
+  color: var(--fg-brand);
+}
+
+.iconButton--add svg {
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+}
+
+.retakeButton:focus-visible,
+.iconButton:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .statusRow svg {
+    animation: none;
+  }
+}
