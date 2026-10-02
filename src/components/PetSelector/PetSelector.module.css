@@ -1,0 +1,105 @@
+.card {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  width: 100%;
+  min-height: var(--size-touch-target);
+  padding: var(--spacing-16);
+  border-radius: var(--radius-xl);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.card--default {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-secondary);
+}
+
+.card--selected {
+  background: var(--bg-brand-subtle);
+  border: 2px solid var(--border-brand);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-48);
+  height: var(--spacing-48);
+  border-radius: var(--radius-full);
+  background: var(--bg-brand-subtle);
+}
+
+/* Figma's icon is 28px, between --size-icon-lg (24) and the next step up.
+   Using --size-icon-lg to match the same 48px-circle/icon pairing already
+   established by DocumentCard's .iconCircle. */
+.avatar svg {
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  color: var(--fg-brand);
+}
+
+.info {
+  flex: 1 1 0%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-text-md);
+  line-height: var(--line-height-text-md);
+  color: var(--text-primary);
+}
+
+.detail {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-tertiary);
+}
+
+.selector {
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-primary);
+}
+
+.card--selected .ring {
+  border-color: var(--border-brand);
+}
+
+.dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-brand-solid);
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DocumentCard, ValidationMessage } from '../components';
+import { DocumentCard, PetSelector, ValidationMessage } from '../components';
 
 type Theme = 'light' | 'dark';
 type TextSize = 'default' | 'large';
@@ -7,6 +7,7 @@ type TextSize = 'default' | 'large';
 export function Playground() {
   const [theme, setTheme] = useState<Theme>('light');
   const [textSize, setTextSize] = useState<TextSize>('default');
+  const [selectedPet, setSelectedPet] = useState<'luna' | 'max'>('luna');
 
   // Theme and text-size are attribute switches on <html>, per CLAUDE.md,
   // not scoped to a wrapper element - that's how real consumers apply them.
@@ -129,6 +130,31 @@ export function Playground() {
           title="No action needed right now"
           description="showAction is false here — the component works without a link too."
           showAction={false}
+        />
+      </div>
+
+      <div
+        role="radiogroup"
+        aria-label="Which pet is this claim for"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-12)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <PetSelector
+          state={selectedPet === 'luna' ? 'selected' : 'default'}
+          name="Luna"
+          detail="Beagle · 4 years · Policy ending 8821"
+          onSelect={() => setSelectedPet('luna')}
+        />
+        <PetSelector
+          state={selectedPet === 'max' ? 'selected' : 'default'}
+          name="Max"
+          detail="Tabby cat · 2 years · Policy ending 8821"
+          onSelect={() => setSelectedPet('max')}
         />
       </div>
     </div>
