@@ -9,7 +9,7 @@ Design tokens and React components for a pet insurance reimbursement flow (nybbl
 ## Rules
 - Use only CSS variables from build/css/tokens.css (e.g. var(--text-primary), var(--spacing-16)). No hardcoded colors or sizes.
 - Touch targets use var(--size-touch-target). Components must work with data-text-size="large".
-- Icons: lucide-react (same names as the Feather icons in Figma).
+- Icons: Streamline Flex, exported as SVG to match the Figma source (see "Icons" below). `lucide-react` stays installed for components built before this change; don't retrofit them.
 - Component props mirror Figma properties (State, Title, Show action → state, title, showAction).
 - One component per branch (feat/<component-name>) and one PR per component.
 - Small commits with conventional messages (feat:, fix:, docs:, chore:).
@@ -123,7 +123,7 @@ No framework or styling setup exists yet. Before writing the first component, as
   - Variant `State = Default | Error` → `state: 'default' | 'error'`
   - Text property `Title` → `title: string`
   - Boolean `Show action` → `showAction?: boolean`
-  - Instance swap `Icon` → `icon?: LucideIcon` (or a ReactNode)
+  - Instance swap `Icon` → `icon?: LucideIcon` for Feather-sourced icons, or `icon?: React.FC<React.SVGProps<SVGSVGElement>>` for an exported Streamline Flex SVG (see "Icons")
 - Style only with token variables. No inline hex/px, no Tailwind-style utility values.
 
 ```tsx
@@ -149,10 +149,11 @@ export function DocumentCard({ state = 'default', title, showAction = true }: Do
 
 ## Icons
 
-- Figma uses Feather icons; code uses `lucide-react` (not installed yet: `npm i lucide-react` in the component PR).
-- Map by name: Feather `file-text` → `FileText`, `alert-circle` → `AlertCircle`, `check-circle` → `CheckCircle`. Lucide renamed a few (e.g. some `*-circle` icons became `Circle*`); if an import doesn't exist, search Lucide for the Feather name rather than exporting an SVG.
-- Don't download icon SVGs from Figma for icons that exist in Lucide.
-- Size with `--size-icon-*`, color with `--fg-*` (`currentColor` flows from `color`). Decorative icons get `aria-hidden`.
+- As of the icon refresh (post-warm-palette), Figma's product icons are **Streamline Flex** (`*-Flex` suffix on the component name, e.g. `Home-2 Streamline Flex`, `Text-File Streamline Flex`), not Feather. This was a deliberate switch to match the Streamline illustration set already used for empty states — Lucide's default line weight didn't read as part of the same family.
+- Streamline Flex has no lucide-react equivalent. Export each icon as SVG with `download_assets` into `src/assets/icons/`, the same workflow as illustrations (see "Assets" below) — don't try to map it to a Lucide name or search Lucide for a substitute.
+- In Figma these icons are single-stroke and bound to `fg/*` variables (confirmed on the tab bar and info icon: `fg/primary`, brand). When exporting, strip the literal stroke color and set `stroke="currentColor"` in the SVG so it still themes through `color: var(--fg-*)` the same way a Lucide icon would — don't bake in the hex from the export.
+- Components built before this change (e.g. `DocumentCard`'s action-button icons) can stay on `lucide-react`; it's still installed. Only use Streamline Flex where the Figma source itself now uses it — check the instance's main component name in `get_design_context` rather than assuming.
+- Size with `--size-icon-*`. Decorative icons get `aria-hidden`.
 
 ## Assets
 
@@ -163,6 +164,6 @@ No image/illustration assets exist yet and there's no CDN. If a design needs one
 1. From a Figma link, take `fileKey` and `node-id` (convert `123-456` to `123:456`).
 2. `get_design_context` for the node (load the figma-design-to-code skill first), plus `get_screenshot` for visual reference.
 3. `get_variable_defs` to confirm which variables the node uses; they should all resolve to existing CSS variables.
-4. Translate the generated code into this repo's conventions: replace any Tailwind/raw values with `var(--…)` tokens, Feather/SVG icons with `lucide-react`, and property names with the prop mapping above.
+4. Translate the generated code into this repo's conventions: replace any Tailwind/raw values with `var(--…)` tokens and property names with the prop mapping above. For icons, check the instance's main component name — Streamline Flex icons get exported as SVG (see "Icons"), Feather icons predating the refresh map to `lucide-react`.
 5. Check the result against the screenshot in light/dark and default/large text.
 6. Branch `feat/<component-name>`, conventional commits, one PR per component.
