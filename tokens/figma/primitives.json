@@ -17,47 +17,47 @@
     "gray": {
       "50": {
         "$type": "color",
-        "$value": "#fafafa"
+        "$value": "#faf6ef"
       },
       "100": {
         "$type": "color",
-        "$value": "#f5f5f5"
+        "$value": "#f5eee1"
       },
       "200": {
         "$type": "color",
-        "$value": "#e5e5e5"
+        "$value": "#ede2cc"
       },
       "300": {
         "$type": "color",
-        "$value": "#d4d4d4"
+        "$value": "#ddccae"
       },
       "400": {
         "$type": "color",
-        "$value": "#a3a3a3"
+        "$value": "#b5a186"
       },
       "500": {
         "$type": "color",
-        "$value": "#737373"
+        "$value": "#8a7860"
       },
       "600": {
         "$type": "color",
-        "$value": "#525252"
+        "$value": "#665848"
       },
       "700": {
         "$type": "color",
-        "$value": "#404040"
+        "$value": "#4a4038"
       },
       "800": {
         "$type": "color",
-        "$value": "#262626"
+        "$value": "#2e2822"
       },
       "900": {
         "$type": "color",
-        "$value": "#171717"
+        "$value": "#1d1915"
       },
       "950": {
         "$type": "color",
-        "$value": "#0a0a0a"
+        "$value": "#0e0c0a"
       }
     },
     "brand": {
