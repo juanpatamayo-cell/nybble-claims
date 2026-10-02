@@ -16,7 +16,7 @@ Design tokens and React components for a pet insurance reimbursement flow (nybbl
 
 ## Current state of the repo
 
-Only the token pipeline exists today. There is **no React app, bundler, component folder, Storybook, asset folder or icon package installed yet**, so don't assume any of them. When the first component lands, it sets the pattern (see "Components" below) and this file should be updated.
+The token pipeline plus a React + Vite app exist. Stack: React 19, Vite, CSS Modules (`*.module.css`), `lucide-react` for Feather-era icons, `@fontsource/inter-tight` + `@fontsource/fraunces` for type. `DocumentCard` is the first component and sets the pattern for the rest of the roadmap (see "Components" below). There's no Storybook yet — components are previewed in `src/playground/Playground.tsx`. No `src/assets/` illustrations are committed yet; see "Assets" below.
 
 ```
 tokens/figma/          DTCG JSON exported from Figma. Never edit by hand.
@@ -26,6 +26,12 @@ build/css/             Generated, committed. Never edit by hand.
   theme-dark.css         [data-theme="dark"] (semantic colors only)
   text-large.css         [data-text-size="large"] (font-size, line-height, size only)
 build/json/tokens.json Flat JSON of the default build (for JS / React Native)
+src/
+  components/<Name>/     One folder per component: <Name>.tsx, <Name>.module.css, index.ts
+  components/index.ts    Re-exports every component
+  playground/            Playground.tsx — renders every component/variant for manual QA
+  styles/global.css      Resets + font-smoothing only; component styles live in their module.css
+  main.tsx               Loads the three token stylesheets + fonts, mounts Playground
 .github/workflows/tokens.yml  CI: rebuilds tokens and fails if build/ is stale
 ```
 
@@ -112,11 +118,11 @@ Component requirements:
 - Verify every component in 4 combinations: light/dark × default/large text.
 - No responsive breakpoints are defined as tokens. The flow is mobile-first; use fluid layout (flex/grid, `max-width`) and only add media queries if a design actually changes layout.
 
-## Components (planned — first one sets the pattern)
+## Components
 
-Roadmap: `DocumentCard`, `ValidationMessage`, `EstimateCard`, `ClaimStatusStepper`, then Storybook on GitHub Pages, then Code Connect.
+Roadmap: ~~`DocumentCard`~~ (done), `ValidationMessage`, `EstimateCard`, `ClaimStatusStepper`, then Storybook on GitHub Pages, then Code Connect.
 
-No framework or styling setup exists yet. Before writing the first component, ask the user to confirm the stack (React + Vite, and CSS Modules vs. plain CSS) instead of picking one silently. Whatever is chosen, these rules hold:
+Stack is decided: React + Vite, CSS Modules. Don't re-ask the user — follow `src/components/DocumentCard/` as the reference implementation (`DocumentCard.tsx`, `DocumentCard.module.css`, `index.ts`) for file layout, prop conventions and token usage; these rules hold for every component after it:
 
 - Name the component exactly as the Figma component (PascalCase).
 - Props mirror Figma component properties, camelCased; variant values become string unions in lowercase:
@@ -125,27 +131,7 @@ No framework or styling setup exists yet. Before writing the first component, as
   - Boolean `Show action` → `showAction?: boolean`
   - Instance swap `Icon` → `icon?: LucideIcon` for Feather-sourced icons, or `icon?: React.FC<React.SVGProps<SVGSVGElement>>` for an exported Streamline Flex SVG (see "Icons")
 - Style only with token variables. No inline hex/px, no Tailwind-style utility values.
-
-```tsx
-// Shape to follow (illustrative, not in the repo yet)
-import { FileText } from 'lucide-react';
-
-type DocumentCardProps = {
-  state?: 'default' | 'uploading' | 'error';
-  title: string;
-  showAction?: boolean;
-};
-
-export function DocumentCard({ state = 'default', title, showAction = true }: DocumentCardProps) {
-  return (
-    <div className={`document-card document-card--${state}`}>
-      <FileText aria-hidden style={{ width: 'var(--size-icon-md)', height: 'var(--size-icon-md)', color: 'var(--fg-secondary)' }} />
-      <span className="document-card__title">{title}</span>
-      {showAction && <button className="document-card__action">Replace</button>}
-    </div>
-  );
-}
-```
+- Add every new component's states to `src/playground/Playground.tsx` so they're visible for manual QA (light/dark × default/large text).
 
 ## Icons
 
