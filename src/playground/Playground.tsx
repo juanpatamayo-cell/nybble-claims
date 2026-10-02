@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DocumentCard, ValidationMessage } from '../components';
+import { DocumentCard, EstimateCard, ValidationMessage } from '../components';
 
 type Theme = 'light' | 'dark';
 type TextSize = 'default' | 'large';
@@ -130,6 +130,30 @@ export function Playground() {
           description="showAction is false here — the component works without a link too."
           showAction={false}
         />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-16)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <EstimateCard
+          size="full"
+          amount="$96.00"
+          footnote="Final amount is confirmed after review. Paid to your bank account 3–5 days after approval."
+          breakdown={[
+            { label: 'Vet bill total', value: '$185.00' },
+            { label: 'Not covered (food, grooming)', value: '−$15.00', info: true },
+            { label: 'Annual deductible', value: '−$50.00', info: true },
+            { label: 'Your coverage', value: '80%', info: true },
+          ]}
+          onInfoClick={(label) => console.log('info', label)}
+        />
+        <EstimateCard size="compact" amount="$96.00" subtext="After deductible and 80% coverage" />
       </div>
     </div>
   );
