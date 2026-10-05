@@ -96,5 +96,5 @@ Published automatically to GitHub Pages on every push to `main` by the **Storybo
 - [x] **M2** — remaining components (table above)
 - [x] **M3** — Storybook published on GitHub Pages
 - [ ] **M4** — iterate on design-review feedback
-- [ ] **v0.1** — tag now that M2 has landed (full component set)
+- [x] **v0.1** — [tagged](https://github.com/juanpatamayo-cell/nybble-claims/releases/tag/v0.1): full component set, Storybook published
 - [ ] **v1.0** — tag once M4 lands too (published, documented, reviewed)
