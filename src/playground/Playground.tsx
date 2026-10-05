@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ClaimStatusStepper, DocumentCard, EstimateCard, PetSelector, ValidationMessage } from '../components';
+import { CameraModule, ClaimStatusStepper, DocumentCard, EstimateCard, PetSelector, ValidationMessage } from '../components';
 
 type Theme = 'light' | 'dark';
 type TextSize = 'default' | 'large';
@@ -213,6 +213,19 @@ export function Playground() {
           detail="Tabby cat · 2 years · Policy ending 8821"
           onSelect={() => setSelectedPet('max')}
         />
+      </div>
+
+      {/* CameraModule fills its container's height — a real route would size
+          that container to the viewport (100dvh); here it's a fixed-height
+          box just to give it something to fill. */}
+      <div
+        style={{
+          maxWidth: '400px',
+          height: '700px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <CameraModule onCapture={() => console.log('capture')} />
       </div>
     </div>
   );

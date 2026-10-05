@@ -1,0 +1,91 @@
+.overlay {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  /*
+   * Figma's padding here is 120/24/56 (top/sides/bottom), calculated for a
+   * fixed 844px mock height. This component fills its container's height
+   * instead of assuming a device size, so the top/bottom values are the
+   * nearest tokens rather than an exact match — flagged, not invented.
+   */
+  padding: var(--spacing-96) var(--spacing-24) var(--spacing-48);
+  background: var(--bg-overlay);
+}
+
+.instruction {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-md);
+  line-height: var(--line-height-text-md);
+  color: var(--text-inverse);
+}
+
+.framingGuide {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  /* Figma: fixed 326px. Capped with max-width instead of a hard width so
+     it doesn't overflow a narrower-than-mockup viewport. */
+  width: 100%;
+  max-width: 326px;
+  height: 420px;
+  border-radius: var(--radius-2xl);
+  /* Figma specifies an exact 12/10 dash/gap pattern; a plain CSS dashed
+     border can't replicate that precisely. Same tradeoff DocumentCard's
+     empty-state border already makes. */
+  border: 2px dashed var(--fg-on-brand);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-20);
+  width: 100%;
+}
+
+.hint {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  opacity: 0.7;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-inverse);
+}
+
+.shutter {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  padding: 0;
+  border-radius: var(--radius-full);
+  /* 3px stroke isn't a token, same as the 1px-border gotcha elsewhere. */
+  border: 3px solid var(--fg-on-brand);
+  background: transparent;
+  cursor: pointer;
+}
+
+.shutter:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.shutterCore {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-full);
+  background: var(--fg-on-brand);
+}
