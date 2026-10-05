@@ -6,3 +6,6 @@ dist/
 # Local tool config — personal to each contributor's machine
 .claude/settings.local.json
 .codex/
+
+*storybook.log
+storybook-static
