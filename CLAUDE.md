@@ -16,7 +16,7 @@ Design tokens and React components for a pet insurance reimbursement flow (nybbl
 
 ## Current state of the repo
 
-The token pipeline plus a React + Vite app exist. Stack: React 19, Vite, CSS Modules (`*.module.css`), `lucide-react` for Feather-era icons, `@fontsource/inter-tight` + `@fontsource/fraunces` for type. `DocumentCard` is the first component and sets the pattern for the rest of the roadmap (see "Components" below). There's no Storybook yet — components are previewed in `src/playground/Playground.tsx`. No `src/assets/` illustrations are committed yet; see "Assets" below.
+The token pipeline plus a React + Vite app exist. Stack: React 19, Vite, CSS Modules (`*.module.css`), `lucide-react` for Feather-era icons, `@fontsource/inter-tight` + `@fontsource/fraunces` for type. All 6 planned components are shipped (see "Components" below); `DocumentCard` set the pattern the rest followed. Components are previewed both in `src/playground/Playground.tsx` and in Storybook (`npm run storybook`; see "Storybook" below). No `src/assets/` illustrations are committed yet; see "Assets" below.
 
 ```
 tokens/figma/          DTCG JSON exported from Figma. Never edit by hand.
@@ -27,12 +27,14 @@ build/css/             Generated, committed. Never edit by hand.
   text-large.css         [data-text-size="large"] (font-size, line-height, size only)
 build/json/tokens.json Flat JSON of the default build (for JS / React Native)
 src/
-  components/<Name>/     One folder per component: <Name>.tsx, <Name>.module.css, index.ts
+  components/<Name>/     One folder per component: <Name>.tsx, <Name>.module.css, index.ts, <Name>.stories.tsx
   components/index.ts    Re-exports every component
   playground/            Playground.tsx — renders every component/variant for manual QA
   styles/global.css      Resets + font-smoothing only; component styles live in their module.css
   main.tsx               Loads the three token stylesheets + fonts, mounts Playground
-.github/workflows/tokens.yml  CI: rebuilds tokens and fails if build/ is stale
+.storybook/             main.ts (addons), preview.tsx (token/font imports, theme+text-size toolbar globals)
+.github/workflows/tokens.yml      CI: rebuilds tokens and fails if build/ is stale
+.github/workflows/storybook.yml   CI: builds Storybook on every push/PR, deploys to Pages from main
 ```
 
 ## Tokens
@@ -120,9 +122,9 @@ Component requirements:
 
 ## Components
 
-Roadmap: ~~`DocumentCard`~~ (done), `ValidationMessage`, `EstimateCard`, `ClaimStatusStepper`, then Storybook on GitHub Pages, then Code Connect.
+Roadmap: ~~`DocumentCard`~~, ~~`ValidationMessage`~~, ~~`EstimateCard`~~, ~~`ClaimStatusStepper`~~, ~~`PetSelector`~~, ~~`CameraModule`~~ — all shipped. Next: Code Connect, then iterate on design-review feedback (M4).
 
-Stack is decided: React + Vite, CSS Modules. Don't re-ask the user — follow `src/components/DocumentCard/` as the reference implementation (`DocumentCard.tsx`, `DocumentCard.module.css`, `index.ts`) for file layout, prop conventions and token usage; these rules hold for every component after it:
+Stack is decided: React + Vite, CSS Modules. Don't re-ask the user — follow `src/components/DocumentCard/` as the reference implementation (`DocumentCard.tsx`, `DocumentCard.module.css`, `index.ts`, `DocumentCard.stories.tsx`) for file layout, prop conventions and token usage; these rules hold for every component after it:
 
 - Name the component exactly as the Figma component (PascalCase).
 - Props mirror Figma component properties, camelCased; variant values become string unions in lowercase:
@@ -131,7 +133,14 @@ Stack is decided: React + Vite, CSS Modules. Don't re-ask the user — follow `s
   - Boolean `Show action` → `showAction?: boolean`
   - Instance swap `Icon` → `icon?: LucideIcon` for Feather-sourced icons, or `icon?: React.FC<React.SVGProps<SVGSVGElement>>` for an exported Streamline Flex SVG (see "Icons")
 - Style only with token variables. No inline hex/px, no Tailwind-style utility values.
-- Add every new component's states to `src/playground/Playground.tsx` so they're visible for manual QA (light/dark × default/large text).
+- Add every new component's states to `src/playground/Playground.tsx` so they're visible for manual QA (light/dark × default/large text), and to a colocated `<Name>.stories.tsx` with `tags: ['autodocs']` (see "Storybook" below) — same states in both, they're not substitutes for each other.
+
+## Storybook
+
+- `npm run storybook` (dev, localhost:6006) / `npm run build-storybook` (static export to `storybook-static/`, gitignored). Deployed to GitHub Pages from `main` by `.github/workflows/storybook.yml`.
+- One `.stories.tsx` per component, colocated, `tags: ['autodocs']` so the props table is generated from the same JSDoc comments on the component's prop types — don't write separate prose docs that can drift from them.
+- `.storybook/preview.tsx` imports the same token stylesheets + fonts as `src/main.tsx` and exposes **Theme** and **Text size** as toolbar globals (not Storybook's built-in `backgrounds` addon) that set `data-theme`/`data-text-size` on `<html>`, mirroring the Playground's toggle buttons — check all 4 combinations there, same as everywhere else.
+- `@storybook/addon-a11y` runs real axe-core checks per story (panel tab, not CI-blocking — `test: 'todo'` in preview.tsx). Keep deliberately light: no `@storybook/addon-vitest`, Playwright, or Chromatic — `storybook init` installs those by default but this project doesn't use Storybook for test execution or visual-regression hosting, only as the component doc site.
 
 ## Icons
 

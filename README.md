@@ -26,10 +26,11 @@ build/css/                       ← generated, committed
   text-large.css                   [data-text-size="large"]
 build/json/tokens.json           ← flat JSON (for JS / React Native)
 src/
-  components/<Name>/               One folder per component (.tsx, .module.css, index.ts)
+  components/<Name>/               One folder per component (.tsx, .module.css, index.ts, .stories.tsx)
   playground/                      Playground.tsx — every component/variant, for manual QA
   assets/                          Illustrations and exported icons
   main.tsx                         Loads token stylesheets + fonts, mounts the playground
+.storybook/                      ← Storybook config (main.ts, preview.tsx)
 ```
 
 ## Usage
@@ -71,18 +72,29 @@ One component per branch (`feat/<component-name>`), one PR each, same shape as `
 | Component | Status |
 |---|---|
 | DocumentCard | ✅ shipped |
-| ValidationMessage | planned |
-| EstimateCard | planned |
-| ClaimStatusStepper | planned |
-| PetSelector | planned |
-| CameraModule | planned |
+| ValidationMessage | ✅ shipped |
+| EstimateCard | ✅ shipped |
+| ClaimStatusStepper | ✅ shipped |
+| PetSelector | ✅ shipped |
+| CameraModule | ✅ shipped |
+
+## Storybook
+
+```bash
+npm run storybook         # dev server at localhost:6006
+npm run build-storybook   # static export to storybook-static/
+```
+
+Every component has a `.stories.tsx` colocated next to it, with `tags: ['autodocs']` so Storybook generates a props-table docs page from the same JSDoc comments used in the component source — no separate documentation to keep in sync. The toolbar has **Theme** (light/dark) and **Text size** (default/large) globals that set `data-theme`/`data-text-size` on `<html>`, mirroring the Playground's toggle buttons, so every story is checkable in all 4 combinations. [`@storybook/addon-a11y`](https://storybook.js.org/docs/writing-tests/accessibility-testing) runs real axe-core checks per story.
+
+Published automatically to GitHub Pages on every push to `main` by the **Storybook** GitHub Action.
 
 ## Roadmap
 
 - [x] **M0** — docs cleanup (this file, CLAUDE.md, repo hygiene)
-- [ ] **M1** — tokens re-export / sync check
-- [ ] **M2** — remaining components (table above)
-- [ ] **M3** — Storybook published on GitHub Pages
+- [x] **M1** — tokens re-export / sync check
+- [x] **M2** — remaining components (table above)
+- [x] **M3** — Storybook published on GitHub Pages
 - [ ] **M4** — iterate on design-review feedback
-- [ ] **v0.1** — tag once M2 lands (full component set)
-- [ ] **v1.0** — tag once M3 + M4 land (published, documented, reviewed)
+- [ ] **v0.1** — tag now that M2 has landed (full component set)
+- [ ] **v1.0** — tag once M4 lands too (published, documented, reviewed)
