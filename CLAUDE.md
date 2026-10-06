@@ -123,7 +123,7 @@ Component requirements:
 
 ## Components
 
-Roadmap: ~~`DocumentCard`~~, ~~`ValidationMessage`~~, ~~`EstimateCard`~~, ~~`ClaimStatusStepper`~~, ~~`PetSelector`~~, ~~`CameraModule`~~ — all shipped. Code Connect templates (`<Name>.figma.ts`, one per component) are written but not published — the Library file needs a Figma Organization/Enterprise plan to publish; see README's "Code Connect" section for the exact command once it's upgraded. Next: iterate on design-review feedback (M4).
+Roadmap: ~~`DocumentCard`~~, ~~`ValidationMessage`~~, ~~`EstimateCard`~~, ~~`ClaimStatusStepper`~~, ~~`PetSelector`~~, ~~`CameraModule`~~ — all shipped. Code Connect templates (`<Name>.figma.ts`, one per component) are written but not published — the Library file needs a Figma Organization/Enterprise plan to publish; see README's "Code Connect" section for the exact command once it's upgraded. M4 (design-review feedback) is closed as of v1.0 — no open feedback items; treat any new one as a fresh M4-style fix (branch, PR, same icon/token-verification discipline as the ValidationMessage icon syncs).
 
 Stack is decided: React + Vite, CSS Modules. Don't re-ask the user — follow `src/components/DocumentCard/` as the reference implementation (`DocumentCard.tsx`, `DocumentCard.module.css`, `index.ts`, `DocumentCard.stories.tsx`) for file layout, prop conventions and token usage; these rules hold for every component after it:
 
