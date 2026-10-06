@@ -37,14 +37,14 @@ export function WarningDiamondIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function ThreatPhoneIcon(props: SVGProps<SVGSVGElement>) {
+export function BrokenLinkIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 21.6664 21.6421" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <path d="M10.6674 1.06757C8.4864 0.950912 6.29987 0.987669 4.124 1.17757C2.62486 1.30329 1.47457 2.53686 1.35514 4.03757C1.18229 6.22657 1 8.49571 1 10.8214C1 13.1471 1.18071 15.4163 1.35514 17.6053C1.47457 19.106 2.62486 20.3396 4.124 20.4653C6.90229 20.701 9.46686 20.701 12.2436 20.4653C13.7443 20.3396 14.8946 19.106 15.014 17.6053C15.0659 16.9374 15.1193 16.2633 15.1696 15.5813" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M11.6653 11.802H9.67271C10.5684 7.29357 11.7879 4.344 15.1696 1C18.4366 4.38957 19.6183 7.23071 20.6664 11.802H18.8687" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M15.1696 6.401V8.601" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M15.1696 11.4217V11.802" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M8.96871 17.8379H7.39729" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <svg viewBox="0 0 21.6273 21.6429" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M4.98877 11.0085L2.16589 13.8314C1.41922 14.5811 1 15.5961 1 16.6542C1 17.7124 1.41922 18.7274 2.16589 19.4771C2.91563 20.2238 3.93065 20.6429 4.98877 20.6429C6.04689 20.6429 7.06191 20.2238 7.81164 19.4771L9.48723 17.8015" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M13.8343 14.5862H16.642C17.699 14.5862 18.7127 14.1663 19.4601 13.4189C20.2074 12.6716 20.6273 11.6579 20.6273 10.6009C20.6273 9.544 20.2074 8.53033 19.4601 7.78296C18.7127 7.03559 17.699 6.61572 16.642 6.61572H12.6568" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10.8158 1.00024L10.061 4.01934" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M1.00307 5.52884L4.02218 7.03839" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4.77741 1.00024L6.28697 4.01934" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
