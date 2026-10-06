@@ -27,12 +27,13 @@ build/css/             Generated, committed. Never edit by hand.
   text-large.css         [data-text-size="large"] (font-size, line-height, size only)
 build/json/tokens.json Flat JSON of the default build (for JS / React Native)
 src/
-  components/<Name>/     One folder per component: <Name>.tsx, <Name>.module.css, index.ts, <Name>.stories.tsx
+  components/<Name>/     One folder per component: <Name>.tsx, <Name>.module.css, index.ts, <Name>.stories.tsx, <Name>.figma.ts
   components/index.ts    Re-exports every component
   playground/            Playground.tsx — renders every component/variant for manual QA
   styles/global.css      Resets + font-smoothing only; component styles live in their module.css
   main.tsx               Loads the three token stylesheets + fonts, mounts Playground
 .storybook/             main.ts (addons), preview.tsx (token/font imports, theme+text-size toolbar globals)
+figma.config.json       Code Connect CLI config (parser, include glob). Not usable until the Library file is on an Org/Enterprise Figma plan — see README's "Code Connect" section.
 .github/workflows/tokens.yml      CI: rebuilds tokens and fails if build/ is stale
 .github/workflows/storybook.yml   CI: builds Storybook on every push/PR, deploys to Pages from main
 ```
@@ -122,7 +123,7 @@ Component requirements:
 
 ## Components
 
-Roadmap: ~~`DocumentCard`~~, ~~`ValidationMessage`~~, ~~`EstimateCard`~~, ~~`ClaimStatusStepper`~~, ~~`PetSelector`~~, ~~`CameraModule`~~ — all shipped. Next: Code Connect, then iterate on design-review feedback (M4).
+Roadmap: ~~`DocumentCard`~~, ~~`ValidationMessage`~~, ~~`EstimateCard`~~, ~~`ClaimStatusStepper`~~, ~~`PetSelector`~~, ~~`CameraModule`~~ — all shipped. Code Connect templates (`<Name>.figma.ts`, one per component) are written but not published — the Library file needs a Figma Organization/Enterprise plan to publish; see README's "Code Connect" section for the exact command once it's upgraded. Next: iterate on design-review feedback (M4).
 
 Stack is decided: React + Vite, CSS Modules. Don't re-ask the user — follow `src/components/DocumentCard/` as the reference implementation (`DocumentCard.tsx`, `DocumentCard.module.css`, `index.ts`, `DocumentCard.stories.tsx`) for file layout, prop conventions and token usage; these rules hold for every component after it:
 
