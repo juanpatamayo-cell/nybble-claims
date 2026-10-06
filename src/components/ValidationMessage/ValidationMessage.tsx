@@ -1,13 +1,19 @@
-import { AlertCircle, AlertTriangle, ArrowRight, CheckCircle2, Info, type LucideIcon } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import type { SVGProps } from 'react';
+import { CheckSquareIcon, InformationCircleIcon, ThreatPhoneIcon, WarningDiamondIcon } from '../../assets/icons';
 import styles from './ValidationMessage.module.css';
 
 export type ValidationMessageType = 'info' | 'success' | 'warning' | 'error';
 
-const ICONS: Record<ValidationMessageType, LucideIcon> = {
-  info: Info,
-  success: CheckCircle2,
-  warning: AlertTriangle,
-  error: AlertCircle,
+// Streamline Flex icons (post icon-refresh), not lucide-react — see
+// CLAUDE.md's "Icons" section. Error uses Figma's "Threat-Phone" icon;
+// visually a device-with-danger glyph, not literally document-related,
+// but that's the icon the Figma source binds for this variant.
+const ICONS: Record<ValidationMessageType, (props: SVGProps<SVGSVGElement>) => React.JSX.Element> = {
+  info: InformationCircleIcon,
+  success: CheckSquareIcon,
+  warning: WarningDiamondIcon,
+  error: ThreatPhoneIcon,
 };
 
 export type ValidationMessageProps = {
