@@ -16,5 +16,6 @@
     "noEmit": true,
     "resolveJsonModule": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/**/*.figma.ts"]
 }

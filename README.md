@@ -89,6 +89,30 @@ Every component has a `.stories.tsx` colocated next to it, with `tags: ['autodoc
 
 Published automatically to GitHub Pages on every push to `main` by the **Storybook** GitHub Action.
 
+## Code Connect
+
+Every component has a colocated `<Name>.figma.ts` — a [Code Connect](https://www.figma.com/code-connect-docs/) parserless template mapping its Figma component to the matching React component, so Figma Dev Mode can show the real code snippet (with the right props filled in) instead of generic markup.
+
+These templates are written and ready, but **not yet published** — the nybblegroup UX challenge Library file is on a Figma plan below Organization/Enterprise, and Code Connect's publish/inspect APIs require a Dev or Full seat on one of those plans. Once the file is on a qualifying plan:
+
+```bash
+npm install --save-dev @figma/code-connect
+npx figma connect publish --token <figma-personal-access-token>
+```
+
+`figma.config.json` at the repo root already points the CLI at `src/components/**/*.figma.ts`. `.figma.ts` files are excluded from `tsc`/`vite build` (see `tsconfig.app.json`) since they import the `figma` virtual module that only exists once `@figma/code-connect` is installed — install it before publishing, and editor type-checking on these files will start working too.
+
+| Component | Figma component | Template |
+|---|---|---|
+| DocumentCard | Document card | ✅ |
+| ValidationMessage | Validation message | ✅ |
+| EstimateCard | Estimate card | ✅ |
+| ClaimStatusStepper | Claim status stepper | ✅ |
+| PetSelector | Pet selector card | ✅ |
+| CameraModule | Camera overlay | ✅ |
+
+The Library file also has unpublished-to-code Figma components (ClaimCard, CoverageRow, ClaimHeader, CoverageSummary, AppBar, TabBar, BottomSheet, ActionBar) with no corresponding React component yet — no template exists for these until they're built.
+
 ## Roadmap
 
 - [x] **M0** — docs cleanup (this file, CLAUDE.md, repo hygiene)
