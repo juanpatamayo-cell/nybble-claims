@@ -119,6 +119,6 @@ The Library file also has unpublished-to-code Figma components (ClaimCard, Cover
 - [x] **M1** — tokens re-export / sync check
 - [x] **M2** — remaining components (table above)
 - [x] **M3** — Storybook published on GitHub Pages
-- [ ] **M4** — iterate on design-review feedback
+- [x] **M4** — iterate on design-review feedback (ValidationMessage icon sync, #17 and #18)
 - [x] **v0.1** — [tagged](https://github.com/juanpatamayo-cell/nybble-claims/releases/tag/v0.1): full component set, Storybook published
-- [ ] **v1.0** — tag once M4 lands too (published, documented, reviewed)
+- [x] **v1.0** — [tagged](https://github.com/juanpatamayo-cell/nybble-claims/releases/tag/v1.0): design-review feedback addressed, Code Connect templates written
