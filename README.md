@@ -12,7 +12,7 @@ React 19 + Vite + TypeScript, CSS Modules for component styles, [Fraunces](https
 
 ## Structure
 
-```
+```text
 tokens/figma/                    ← exported from Figma (DTCG format), do not edit by hand
   primitives.json                  color ramps, spacing, radius
   semantic.light.json              text / bg / border / fg — light mode
@@ -70,7 +70,7 @@ The **Tokens** GitHub Action rebuilds on every push/PR and fails if `build/` doe
 One component per branch (`feat/<component-name>`), one PR each, same shape as `DocumentCard` — see CLAUDE.md for the prop-mapping and token rules every component follows.
 
 | Component | Status |
-|---|---|
+| --- | --- |
 | DocumentCard | ✅ shipped |
 | ValidationMessage | ✅ shipped |
 | EstimateCard | ✅ shipped |
@@ -103,7 +103,7 @@ npx figma connect publish --token <figma-personal-access-token>
 `figma.config.json` at the repo root already points the CLI at `src/components/**/*.figma.ts`. `.figma.ts` files are excluded from `tsc`/`vite build` (see `tsconfig.app.json`) since they import the `figma` virtual module that only exists once `@figma/code-connect` is installed — install it before publishing, and editor type-checking on these files will start working too.
 
 | Component | Figma component | Template |
-|---|---|---|
+| --- | --- | --- |
 | DocumentCard | Document card | ✅ |
 | ValidationMessage | Validation message | ✅ |
 | EstimateCard | Estimate card | ✅ |
