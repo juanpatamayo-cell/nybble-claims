@@ -1,6 +1,6 @@
 {
   "name": "nybble-claims",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Design tokens and components for the pet insurance reimbursement flow (nybblegroup UX challenge).",
   "type": "module",
