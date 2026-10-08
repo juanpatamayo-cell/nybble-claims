@@ -36,6 +36,8 @@ src/
 figma.config.json       Code Connect CLI config (parser, include glob). Not usable until the Library file is on an Org/Enterprise Figma plan — see README's "Code Connect" section.
 .github/workflows/tokens.yml      CI: rebuilds tokens and fails if build/ is stale
 .github/workflows/storybook.yml   CI: builds Storybook on every push/PR, deploys to Pages from main
+.github/workflows/ci.yml          CI: typecheck, build, and Storybook a11y checks (npm run test:a11y) on every push/PR
+vite.config.ts          Vite config + the `storybook` Vitest project (addon-vitest, Playwright/Chromium) that test:a11y runs
 ```
 
 ## Tokens
@@ -141,7 +143,9 @@ Stack is decided: React + Vite, CSS Modules. Don't re-ask the user — follow `s
 - `npm run storybook` (dev, localhost:6006) / `npm run build-storybook` (static export to `storybook-static/`, gitignored). Deployed to GitHub Pages from `main` by `.github/workflows/storybook.yml`.
 - One `.stories.tsx` per component, colocated, `tags: ['autodocs']` so the props table is generated from the same JSDoc comments on the component's prop types — don't write separate prose docs that can drift from them.
 - `.storybook/preview.tsx` imports the same token stylesheets + fonts as `src/main.tsx` and exposes **Theme** and **Text size** as toolbar globals (not Storybook's built-in `backgrounds` addon) that set `data-theme`/`data-text-size` on `<html>`, mirroring the Playground's toggle buttons — check all 4 combinations there, same as everywhere else.
-- `@storybook/addon-a11y` runs real axe-core checks per story (panel tab, not CI-blocking — `test: 'todo'` in preview.tsx). Keep deliberately light: no `@storybook/addon-vitest`, Playwright, or Chromatic — `storybook init` installs those by default but this project doesn't use Storybook for test execution or visual-regression hosting, only as the component doc site.
+- `@storybook/addon-a11y` runs real axe-core checks per story, gated at `test: 'error'` in `.storybook/preview.tsx` — a violation fails the suite, it's not just a panel warning. `npm run test:a11y` (`vitest run --project=storybook`) runs every `.stories.tsx` as a Vitest browser test (via `@storybook/addon-vitest`, headless Chromium through Playwright, config in `vite.config.ts`'s `storybook` project) and is required in CI (`.github/workflows/ci.yml`, alongside `typecheck` and `build`).
+  - This reverses the earlier "no addon-vitest/Playwright" call from when Storybook was first set up — that was right when Storybook was doc-only, but a real CI a11y gate needs a real browser to render components and compute things like color contrast; jsdom can't do that accurately. `addon-vitest` here is scoped to accessibility only (not interaction/snapshot testing, not Chromatic/visual-regression) — still deliberately light, just not as light as before.
+  - A failure means an axe violation was found on that story's default render — fix the underlying token/CSS, don't silence the story or weaken the rule to get green.
 
 ## Icons
 

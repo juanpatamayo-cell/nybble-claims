@@ -44,8 +44,10 @@ const preview: Preview = {
       },
     },
     a11y: {
-      // 'todo' - show a11y violations in the panel without failing CI
-      test: 'todo',
+      // 'error' - a real gate: `npm run test:a11y` (CI) fails the build on
+      // any axe violation, not just a panel warning. See CLAUDE.md's
+      // Storybook section for how this is wired to @storybook/addon-vitest.
+      test: 'error',
     },
   },
   globalTypes: {
