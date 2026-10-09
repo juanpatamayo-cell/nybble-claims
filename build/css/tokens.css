@@ -132,7 +132,7 @@
   --text-placeholder: var(--color-gray-500);
   --text-disabled: var(--color-gray-400);
   --text-brand: var(--color-brand-700);
-  --text-error: var(--color-red-600);
+  --text-error: var(--color-red-700);
   --text-warning: var(--color-orange-700);
   --text-success: var(--color-green-700);
   --text-info: var(--color-blue-700);
