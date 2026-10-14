@@ -20,12 +20,18 @@ import '@fontsource/fraunces/700.css';
 const withThemeAttrs: Decorator = (Story, context) => {
   const { theme, textSize } = context.globals;
 
+  // Storybook decorators render inside the React tree and may call hooks,
+  // but react-hooks/rules-of-hooks only recognizes PascalCase/`use*` names
+  // as hook-safe. `withX` is Storybook's own documented decorator naming
+  // convention, so the lint exception (not a rename) is the right call here.
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const root = document.documentElement;
     if (theme === 'dark') root.setAttribute('data-theme', 'dark');
     else root.removeAttribute('data-theme');
   }, [theme]);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const root = document.documentElement;
     if (textSize === 'large') root.setAttribute('data-text-size', 'large');

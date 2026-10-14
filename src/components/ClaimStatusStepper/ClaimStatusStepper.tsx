@@ -24,7 +24,9 @@ function Step({ state, title, description, showConnector = true }: StepProps) {
           {state === 'current' && <span className={styles.dot} />}
         </div>
         {showConnector && (
-          <div className={`${styles.connector} ${state === 'complete' ? styles['connector--complete'] : ''}`} />
+          <div
+            className={`${styles.connector} ${state === 'complete' ? styles['connector--complete'] : ''}`}
+          />
         )}
       </div>
       <div className={`${styles.body} ${styles[`body--${state}`]}`}>
@@ -80,29 +82,66 @@ export function ClaimStatusStepper({
     <div className={styles.stepper}>
       <Step state="complete" title="Claim received" description={receivedAt} />
 
-      {status === 'in-review' && <Step state="current" title="In review" description="Usually 1–2 business days" />}
-      {isActionRequired && <Step state="action-required" title="We need something from you" description={actionMessage} />}
-      {isApprovedOrPaid && <Step state="complete" title="Reviewed" description={reviewedAt} />}
+      {status === 'in-review' && (
+        <Step
+          state="current"
+          title="In review"
+          description="Usually 1–2 business days"
+        />
+      )}
+      {isActionRequired && (
+        <Step
+          state="action-required"
+          title="We need something from you"
+          description={actionMessage}
+        />
+      )}
+      {isApprovedOrPaid && (
+        <Step state="complete" title="Reviewed" description={reviewedAt} />
+      )}
 
       {(status === 'in-review' || isActionRequired) && (
         <Step
           state="pending"
           title="Decision"
-          description={isActionRequired ? 'Paused until we get your document' : decisionExpected}
+          description={
+            isActionRequired
+              ? 'Paused until we get your document'
+              : decisionExpected
+          }
         />
       )}
       {isApprovedOrPaid && (
-        <Step state="complete" title={`Approved · ${approvedAmount ?? ''}`} description={approvedAt} />
+        <Step
+          state="complete"
+          title={`Approved · ${approvedAmount ?? ''}`}
+          description={approvedAt}
+        />
       )}
 
       {(status === 'in-review' || isActionRequired) && (
-        <Step state="pending" title="Payment sent" description="3–5 days after approval" showConnector={false} />
+        <Step
+          state="pending"
+          title="Payment sent"
+          description="3–5 days after approval"
+          showConnector={false}
+        />
       )}
       {status === 'approved' && (
-        <Step state="current" title="Payment on the way" description={paymentEta} showConnector={false} />
+        <Step
+          state="current"
+          title="Payment on the way"
+          description={paymentEta}
+          showConnector={false}
+        />
       )}
       {status === 'paid' && (
-        <Step state="complete" title="Payment sent" description={paymentDetail} showConnector={false} />
+        <Step
+          state="complete"
+          title="Payment sent"
+          description={paymentDetail}
+          showConnector={false}
+        />
       )}
     </div>
   );

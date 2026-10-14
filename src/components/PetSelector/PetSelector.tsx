@@ -19,7 +19,12 @@ export type PetSelectorProps = {
   onSelect?: () => void;
 };
 
-export function PetSelector({ state = 'default', name, detail, onSelect }: PetSelectorProps) {
+export function PetSelector({
+  state = 'default',
+  name,
+  detail,
+  onSelect,
+}: PetSelectorProps) {
   const isSelected = state === 'selected';
 
   return (

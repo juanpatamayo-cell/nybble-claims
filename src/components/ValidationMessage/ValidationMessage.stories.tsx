@@ -52,7 +52,8 @@ export const WithoutAction: Story = {
   args: {
     type: 'info',
     title: 'No action needed right now',
-    description: 'showAction is false here — the component works without a link too.',
+    description:
+      'showAction is false here — the component works without a link too.',
     showAction: false,
   },
 };

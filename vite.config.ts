@@ -6,7 +6,10 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vite';
 
-const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+const dirname =
+  typeof __dirname !== 'undefined'
+    ? __dirname
+    : path.dirname(fileURLToPath(import.meta.url));
 
 // Runs every .stories.tsx as a Vitest browser test via @storybook/addon-vitest,
 // which also runs @storybook/addon-a11y's axe checks per story (see
@@ -18,7 +21,9 @@ export default defineConfig({
     projects: [
       {
         extends: true,
-        plugins: [storybookTest({ configDir: path.join(dirname, '.storybook') })],
+        plugins: [
+          storybookTest({ configDir: path.join(dirname, '.storybook') }),
+        ],
         test: {
           name: 'storybook',
           browser: {

@@ -3,10 +3,12 @@
 Design tokens and React components for a pet insurance reimbursement flow (nybblegroup UX challenge).
 
 ## Source of truth
+
 - Figma library: https://www.figma.com/design/IEAuFSPBjRPwXbmMdmFfcK/nybblegroup-UX-challenge-Library
 - Tokens exported to tokens/figma/ (DTCG) → built with `npm run tokens` into build/css/
 
 ## Rules
+
 - Use only CSS variables from build/css/tokens.css (e.g. var(--text-primary), var(--spacing-16)). No hardcoded colors or sizes.
 - Touch targets use var(--size-touch-target). Components must work with data-text-size="large".
 - Icons: Streamline Flex, exported as SVG to match the Figma source (see "Icons" below). `lucide-react` stays installed for components built before this change; don't retrofit them.
@@ -36,21 +38,28 @@ src/
 figma.config.json       Code Connect CLI config (parser, include glob). Not usable until the Library file is on an Org/Enterprise Figma plan — see README's "Code Connect" section.
 .github/workflows/tokens.yml      CI: rebuilds tokens and fails if build/ is stale
 .github/workflows/storybook.yml   CI: builds Storybook on every push/PR, deploys to Pages from main
-.github/workflows/ci.yml          CI: typecheck, build, and Storybook a11y checks (npm run test:a11y) on every push/PR
+.github/workflows/ci.yml          CI: typecheck, lint, format:check, build, and Storybook a11y checks (npm run test:a11y) on every push/PR
 vite.config.ts          Vite config + the `storybook` Vitest project (addon-vitest, Playwright/Chromium) that test:a11y runs
+eslint.config.js        Flat ESLint config (typescript-eslint + react-hooks + react-refresh), deferring formatting to Prettier
+.prettierrc.json / .prettierignore   Prettier config — see "Linting and formatting" below
 ```
 
-## Tokens
+## Linting and formatting
+
+- `npm run lint` (ESLint, flat config in `eslint.config.js`) and `npm run format:check` (Prettier) both run in CI (`.github/workflows/ci.yml`), alongside `typecheck`. `npm run format` applies Prettier's fixes locally.
+- ESLint: `typescript-eslint`'s recommended rules + `eslint-plugin-react-hooks` + `eslint-plugin-react-refresh`, with `eslint-config-prettier` last in the config array to turn off any formatting rule that would conflict with Prettier. `src/**/*.figma.ts` is excluded (same reason as `tsconfig.app.json`'s exclude — these files import the non-existent `figma` module and aren't type-checkable until `@figma/code-connect` is installed).
+- **`typescript` is pinned to the 6.x line (currently `^6.0.3`), not the 7.x the project briefly moved to** — `typescript-eslint` hard-fails (a thrown error, not just a type mismatch) against TypeScript 7's rewritten native-compiler API, even for syntax-only parsing with no type info requested. This is a known, currently-unresolved upstream gap (tracked at [typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940)), not a bug in this repo's config. Don't bump `typescript` past the 6.x line until that issue resolves — doing so will break `npm run lint` (and therefore CI) outright, not just produce new lint warnings.
+- A lint exception should be a last resort, same spirit as a design-token exception: prefer fixing the underlying code. When a rule's heuristic genuinely doesn't fit the pattern (e.g. `react-hooks/rules-of-hooks` not recognizing Storybook's `withX` decorator naming convention as hook-safe — see `.storybook/preview.tsx`), use a scoped `eslint-disable-next-line` with a comment explaining why, not a blanket rule disable in `eslint.config.js`.
 
 ### Figma collection → file → CSS mapping
 
-| Figma collection | Mode | File | Output |
-|---|---|---|---|
-| Primitives | — | `primitives.json` | `--color-*`, `--spacing-*`, `--radius-*` in `:root` |
-| Semantic | Light | `semantic.light.json` | `--text-*`, `--bg-*`, `--border-*`, `--fg-*` in `:root` |
-| Semantic | Dark | `semantic.dark.json` | same names under `[data-theme="dark"]` |
-| Typography & sizing | Default | `typography-sizing.default.json` | `--font-*`, `--line-height-*`, `--size-*` in `:root` |
-| Typography & sizing | Large text | `typography-sizing.large-text.json` | size overrides under `[data-text-size="large"]` |
+| Figma collection    | Mode       | File                                | Output                                                  |
+| ------------------- | ---------- | ----------------------------------- | ------------------------------------------------------- |
+| Primitives          | —          | `primitives.json`                   | `--color-*`, `--spacing-*`, `--radius-*` in `:root`     |
+| Semantic            | Light      | `semantic.light.json`               | `--text-*`, `--bg-*`, `--border-*`, `--fg-*` in `:root` |
+| Semantic            | Dark       | `semantic.dark.json`                | same names under `[data-theme="dark"]`                  |
+| Typography & sizing | Default    | `typography-sizing.default.json`    | `--font-*`, `--line-height-*`, `--size-*` in `:root`    |
+| Typography & sizing | Large text | `typography-sizing.large-text.json` | size overrides under `[data-text-size="large"]`         |
 
 Naming: the Figma variable path maps 1:1 to the CSS variable (`text/primary` → `--text-primary`, `bg/brand-solid` → `--bg-brand-solid`). The code syntax on each Figma variable is already set to this, so Dev Mode and `get_design_context` output should show `var(--…)` names directly.
 
@@ -75,17 +84,25 @@ Naming: the Figma variable path maps 1:1 to the CSS variable (`text/primary` →
   background: var(--bg-primary);
 }
 .card__title {
-  font: var(--font-weight-semibold) var(--font-size-text-lg) / var(--line-height-text-lg) var(--font-family-body), sans-serif;
+  font:
+    var(--font-weight-semibold) var(--font-size-text-lg) /
+      var(--line-height-text-lg) var(--font-family-body),
+    sans-serif;
   color: var(--text-primary);
 }
 .outcome__headline {
   /* A headline moment (e.g. "Reimbursement sent") — font-family-display, not -body. */
-  font: var(--font-weight-semibold) var(--font-size-display-xs) / var(--line-height-display-xs) var(--font-family-display), Georgia, serif;
+  font:
+    var(--font-weight-semibold) var(--font-size-display-xs) /
+      var(--line-height-display-xs) var(--font-family-display),
+    Georgia,
+    serif;
   color: var(--text-primary);
 }
 ```
 
 Gotchas:
+
 - `--font-family-body` is `'Inter Tight'` and `--font-family-display` is `Fraunces`, both quoted by the build since the family names have a space. Always add a fallback in the consuming declaration (`var(--font-family-body), system-ui, sans-serif` / `var(--font-family-display), Georgia, serif`). The page that uses the components has to load both fonts itself — the React app does this in `src/main.tsx` via `@fontsource/inter-tight` and `@fontsource/fraunces`.
 - The Figma plugin bridge used to edit tokens in this repo can't load `Inter Tight` in its own sandbox (`figma.loadFontAsync` fails for every weight except Regular, which only worked once by an unexplained fluke). If `font-family/body` ever needs to change again, the edit has to be made by hand in Figma's own Variables panel, then re-exported into `tokens/figma/typography-sizing.default.json` and rebuilt — the automated `use_figma` path can't do it. `Fraunces` isn't affected; it went in through the normal automated path.
 - There are no composite text styles in the build. Figma text styles have to be rebuilt from the size, line-height and weight variables.
@@ -95,12 +112,14 @@ Gotchas:
 ### When a value from Figma has no token
 
 If `get_design_context` returns a raw hex or px value:
+
 1. Check whether the Figma layer is actually bound to a variable (it often is and the value just wasn't resolved). Use the matching token.
 2. If it truly isn't bound, don't invent a token and don't hardcode it silently. Use the nearest token and flag the mismatch to the user so it can be fixed in the Figma library.
 
 ### Changing tokens
 
 Tokens flow one way: **Figma → `tokens/figma/` → `npm run tokens` → `build/`**.
+
 - Never edit `tokens/figma/*.json` or `build/**` by hand to "fix" a value. Change the variable in Figma, re-export it with the Figma MCP (`get_variable_defs` / `use_figma`) into the same DTCG shape (`$type`, `$value`, references as `{color.gray.900}`), then rebuild.
 - Commit `tokens/` and `build/` together; CI fails if `build/` doesn't match.
 - A new token in `typography-sizing.*` only reaches `text-large.css` if its top-level group is `font-size`, `line-height` or `size` (filter in `scripts/build-tokens.mjs`). A new group needs a filter change.
@@ -110,13 +129,14 @@ Tokens flow one way: **Figma → `tokens/figma/` → `npm run tokens` → `build
 Both modes are attribute switches on an ancestor (normally `<html>` or `<body>`), and all three stylesheets must be loaded:
 
 ```html
-<link rel="stylesheet" href="build/css/tokens.css">
-<link rel="stylesheet" href="build/css/theme-dark.css">
-<link rel="stylesheet" href="build/css/text-large.css">
-<html data-theme="dark" data-text-size="large">
+<link rel="stylesheet" href="build/css/tokens.css" />
+<link rel="stylesheet" href="build/css/theme-dark.css" />
+<link rel="stylesheet" href="build/css/text-large.css" />
+<html data-theme="dark" data-text-size="large"></html>
 ```
 
 Component requirements:
+
 - Never set fixed heights on text containers; let `--line-height-*` drive height so large text doesn't clip.
 - Interactive elements: `min-height: var(--size-touch-target)` (and `min-width` for icon-only buttons).
 - Icons sized with `--size-icon-*` so they scale in large text.

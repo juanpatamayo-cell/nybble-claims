@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { CameraModule, ClaimStatusStepper, DocumentCard, EstimateCard, PetSelector, ValidationMessage } from '../components';
+import {
+  CameraModule,
+  ClaimStatusStepper,
+  DocumentCard,
+  EstimateCard,
+  PetSelector,
+  ValidationMessage,
+} from '../components';
 
 type Theme = 'light' | 'dark';
 type TextSize = 'default' | 'large';
@@ -148,13 +155,21 @@ export function Playground() {
           footnote="Final amount is confirmed after review. Paid to your bank account 3–5 days after approval."
           breakdown={[
             { label: 'Vet bill total', value: '$185.00' },
-            { label: 'Not covered (food, grooming)', value: '−$15.00', info: true },
+            {
+              label: 'Not covered (food, grooming)',
+              value: '−$15.00',
+              info: true,
+            },
             { label: 'Annual deductible', value: '−$50.00', info: true },
             { label: 'Your coverage', value: '80%', info: true },
           ]}
           onInfoClick={(label) => console.log('info', label)}
         />
-        <EstimateCard size="compact" amount="$96.00" subtext="After deductible and 80% coverage" />
+        <EstimateCard
+          size="compact"
+          amount="$96.00"
+          subtext="After deductible and 80% coverage"
+        />
       </div>
 
       <div
@@ -166,7 +181,11 @@ export function Playground() {
           marginTop: 'var(--spacing-24)',
         }}
       >
-        <ClaimStatusStepper status="in-review" receivedAt="Sep 12 · 10:24 AM" decisionExpected="Expected by Sep 15" />
+        <ClaimStatusStepper
+          status="in-review"
+          receivedAt="Sep 12 · 10:24 AM"
+          decisionExpected="Expected by Sep 15"
+        />
         <ClaimStatusStepper
           status="action-required"
           receivedAt="Sep 12 · 10:24 AM"

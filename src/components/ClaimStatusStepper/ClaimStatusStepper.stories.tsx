@@ -24,7 +24,8 @@ export const ActionRequired: Story = {
   args: {
     status: 'action-required',
     receivedAt: 'Sep 12 · 10:24 AM',
-    actionMessage: 'The invoice photo is blurry. Upload a clearer one to keep your claim moving.',
+    actionMessage:
+      'The invoice photo is blurry. Upload a clearer one to keep your claim moving.',
   },
 };
 

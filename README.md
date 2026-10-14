@@ -43,13 +43,15 @@ npm run build    # typecheck + production build
 ```
 
 ```html
-<link rel="stylesheet" href="build/css/tokens.css">
-<link rel="stylesheet" href="build/css/theme-dark.css">
-<link rel="stylesheet" href="build/css/text-large.css">
+<link rel="stylesheet" href="build/css/tokens.css" />
+<link rel="stylesheet" href="build/css/theme-dark.css" />
+<link rel="stylesheet" href="build/css/text-large.css" />
 
 <!-- Large text mode, same switch as the "Large text" mode in Figma -->
 <body data-text-size="large">
-  <button style="min-height: var(--size-touch-target); background: var(--bg-brand-solid); color: var(--text-on-brand);">
+  <button
+    style="min-height: var(--size-touch-target); background: var(--bg-brand-solid); color: var(--text-on-brand);"
+  >
     Continue
   </button>
 </body>
@@ -69,14 +71,14 @@ The **Tokens** GitHub Action rebuilds on every push/PR and fails if `build/` doe
 
 One component per branch (`feat/<component-name>`), one PR each, same shape as `DocumentCard` — see CLAUDE.md for the prop-mapping and token rules every component follows.
 
-| Component | Status |
-| --- | --- |
-| DocumentCard | ✅ shipped |
-| ValidationMessage | ✅ shipped |
-| EstimateCard | ✅ shipped |
+| Component          | Status     |
+| ------------------ | ---------- |
+| DocumentCard       | ✅ shipped |
+| ValidationMessage  | ✅ shipped |
+| EstimateCard       | ✅ shipped |
 | ClaimStatusStepper | ✅ shipped |
-| PetSelector | ✅ shipped |
-| CameraModule | ✅ shipped |
+| PetSelector        | ✅ shipped |
+| CameraModule       | ✅ shipped |
 
 ## Storybook
 
@@ -102,14 +104,14 @@ npx figma connect publish --token <figma-personal-access-token>
 
 `figma.config.json` at the repo root already points the CLI at `src/components/**/*.figma.ts`. `.figma.ts` files are excluded from `tsc`/`vite build` (see `tsconfig.app.json`) since they import the `figma` virtual module that only exists once `@figma/code-connect` is installed — install it before publishing, and editor type-checking on these files will start working too.
 
-| Component | Figma component | Template |
-| --- | --- | --- |
-| DocumentCard | Document card | ✅ |
-| ValidationMessage | Validation message | ✅ |
-| EstimateCard | Estimate card | ✅ |
-| ClaimStatusStepper | Claim status stepper | ✅ |
-| PetSelector | Pet selector card | ✅ |
-| CameraModule | Camera overlay | ✅ |
+| Component          | Figma component      | Template |
+| ------------------ | -------------------- | -------- |
+| DocumentCard       | Document card        | ✅       |
+| ValidationMessage  | Validation message   | ✅       |
+| EstimateCard       | Estimate card        | ✅       |
+| ClaimStatusStepper | Claim status stepper | ✅       |
+| PetSelector        | Pet selector card    | ✅       |
+| CameraModule       | Camera overlay       | ✅       |
 
 The Library file also has unpublished-to-code Figma components (ClaimCard, CoverageRow, ClaimHeader, CoverageSummary, AppBar, TabBar, BottomSheet, ActionBar) with no corresponding React component yet — no template exists for these until they're built.
 

@@ -29,7 +29,12 @@ export function CameraModule({
       <div className={styles.framingGuide} aria-hidden />
       <div className={styles.controls}>
         <p className={styles.hint}>{hint}</p>
-        <button type="button" className={styles.shutter} onClick={onCapture} aria-label="Take photo">
+        <button
+          type="button"
+          className={styles.shutter}
+          onClick={onCapture}
+          aria-label="Take photo"
+        >
           <span className={styles.shutterCore} />
         </button>
       </div>
