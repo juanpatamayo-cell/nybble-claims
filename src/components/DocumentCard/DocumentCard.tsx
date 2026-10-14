@@ -10,7 +10,8 @@ import {
 } from 'lucide-react';
 import styles from './DocumentCard.module.css';
 
-export type DocumentCardState = 'empty' | 'uploading' | 'analyzing' | 'valid' | 'error';
+export type DocumentCardState =
+  'empty' | 'uploading' | 'analyzing' | 'valid' | 'error';
 
 export type DocumentCardProps = {
   /** Figma variant `State`. */
@@ -74,7 +75,13 @@ export function DocumentCard({
           <div className={styles.body}>
             <div className={styles.heading}>
               <p className={styles.title}>{title}</p>
-              {required && <span className={`${styles.badge} ${styles['badge--required']}`}>Required</span>}
+              {required && (
+                <span
+                  className={`${styles.badge} ${styles['badge--required']}`}
+                >
+                  Required
+                </span>
+              )}
             </div>
             {description && <p className={styles.bodyText}>{description}</p>}
           </div>
@@ -98,7 +105,9 @@ export function DocumentCard({
             <div className={styles.heading}>
               <p className={styles.title}>{title}</p>
               {state === 'valid' && (
-                <span className={`${styles.badge} ${styles['badge--verified']}`}>
+                <span
+                  className={`${styles.badge} ${styles['badge--verified']}`}
+                >
                   <CheckCircle2 aria-hidden />
                   Verified
                 </span>
@@ -117,7 +126,10 @@ export function DocumentCard({
                     aria-valuemax={100}
                     aria-label={`Uploading ${title}`}
                   >
-                    <div className={styles.progressBar} style={{ width: `${clampedProgress}%` }} />
+                    <div
+                      className={styles.progressBar}
+                      style={{ width: `${clampedProgress}%` }}
+                    />
                   </div>
                   <p className={styles.progressLabel}>{clampedProgress}%</p>
                 </div>
@@ -131,7 +143,9 @@ export function DocumentCard({
               </div>
             )}
 
-            {state === 'valid' && detail && <p className={styles.bodyText}>{detail}</p>}
+            {state === 'valid' && detail && (
+              <p className={styles.bodyText}>{detail}</p>
+            )}
 
             {state === 'error' && (
               <>
@@ -141,7 +155,11 @@ export function DocumentCard({
                     <p className={styles.messageText}>{errorMessage}</p>
                   </div>
                 )}
-                <button type="button" className={styles.retakeButton} onClick={onRetake}>
+                <button
+                  type="button"
+                  className={styles.retakeButton}
+                  onClick={onRetake}
+                >
                   Retake photo
                 </button>
               </>

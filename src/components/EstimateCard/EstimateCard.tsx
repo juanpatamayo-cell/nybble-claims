@@ -52,7 +52,13 @@ export function EstimateCard({
     <div className={`${styles.card} ${styles[`card--${size}`]}`}>
       <div className={styles.header}>
         <p className={styles.label}>{label}</p>
-        <p className={isCompact ? styles['amount--compact'] : styles['amount--full']}>{amount}</p>
+        <p
+          className={
+            isCompact ? styles['amount--compact'] : styles['amount--full']
+          }
+        >
+          {amount}
+        </p>
         {isCompact && subtext && <p className={styles.subtext}>{subtext}</p>}
       </div>
 

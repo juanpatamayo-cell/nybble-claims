@@ -1,6 +1,11 @@
 import { ArrowRight } from 'lucide-react';
 import type { SVGProps } from 'react';
-import { BrokenLinkIcon, CheckSquareIcon, InformationCircleIcon, WarningDiamondIcon } from '../../assets/icons';
+import {
+  BrokenLinkIcon,
+  CheckSquareIcon,
+  InformationCircleIcon,
+  WarningDiamondIcon,
+} from '../../assets/icons';
 import styles from './ValidationMessage.module.css';
 
 export type ValidationMessageType = 'info' | 'success' | 'warning' | 'error';
@@ -9,7 +14,10 @@ export type ValidationMessageType = 'info' | 'success' | 'warning' | 'error';
 // CLAUDE.md's "Icons" section. Error was "Threat-Phone" (a device/danger
 // glyph, flagged as a weak semantic fit) until a second design pass swapped
 // it for "Broken-Link" — reads as generic mismatch/invalid, closer fit.
-const ICONS: Record<ValidationMessageType, (props: SVGProps<SVGSVGElement>) => React.JSX.Element> = {
+const ICONS: Record<
+  ValidationMessageType,
+  (props: SVGProps<SVGSVGElement>) => React.JSX.Element
+> = {
   info: InformationCircleIcon,
   success: CheckSquareIcon,
   warning: WarningDiamondIcon,

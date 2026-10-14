@@ -16,7 +16,8 @@ export const Full: Story = {
   args: {
     size: 'full',
     amount: '$96.00',
-    footnote: 'Final amount is confirmed after review. Paid to your bank account 3–5 days after approval.',
+    footnote:
+      'Final amount is confirmed after review. Paid to your bank account 3–5 days after approval.',
     breakdown: [
       { label: 'Vet bill total', value: '$185.00' },
       { label: 'Not covered (food, grooming)', value: '−$15.00', info: true },

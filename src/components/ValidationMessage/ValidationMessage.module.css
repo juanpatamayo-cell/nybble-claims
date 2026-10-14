@@ -5,7 +5,8 @@
   gap: var(--spacing-12);
   width: 100%;
   /* Figma's padding is asymmetric (12/16/12/12) — kept as-is, not a typo. */
-  padding: var(--spacing-12) var(--spacing-16) var(--spacing-12) var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-16) var(--spacing-12)
+    var(--spacing-12);
   border: 1px solid;
   border-radius: var(--radius-lg);
 }

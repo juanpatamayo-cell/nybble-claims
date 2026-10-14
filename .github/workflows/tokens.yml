@@ -5,9 +5,21 @@ name: Tokens
 # so what's in the repo always matches what's in Figma.
 on:
   push:
-    paths: ['tokens/**', 'scripts/**', 'package*.json', '.github/workflows/tokens.yml']
+    paths:
+      [
+        'tokens/**',
+        'scripts/**',
+        'package*.json',
+        '.github/workflows/tokens.yml',
+      ]
   pull_request:
-    paths: ['tokens/**', 'scripts/**', 'package*.json', '.github/workflows/tokens.yml']
+    paths:
+      [
+        'tokens/**',
+        'scripts/**',
+        'package*.json',
+        '.github/workflows/tokens.yml',
+      ]
 
 jobs:
   build:
