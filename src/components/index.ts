@@ -9,4 +9,5 @@ export * from './CoverageRow';
 export * from './DocumentCard';
 export * from './EstimateCard';
 export * from './PetSelector';
+export * from './TabBar';
 export * from './ValidationMessage';

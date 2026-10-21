@@ -11,6 +11,7 @@ import {
   DocumentCard,
   EstimateCard,
   PetSelector,
+  TabBar,
   ValidationMessage,
 } from '../components';
 
@@ -21,6 +22,9 @@ export function Playground() {
   const [theme, setTheme] = useState<Theme>('light');
   const [textSize, setTextSize] = useState<TextSize>('default');
   const [selectedPet, setSelectedPet] = useState<'luna' | 'max'>('luna');
+  const [activeTab, setActiveTab] = useState<
+    'home' | 'claims' | 'inbox' | 'profile'
+  >('claims');
 
   // Theme and text-size are attribute switches on <html>, per CLAUDE.md,
   // not scoped to a wrapper element - that's how real consumers apply them.
@@ -298,6 +302,29 @@ export function Playground() {
         <AppBar platform="ios" type="large" title="New claim" />
         <AppBar platform="android" type="standard" title="New claim" />
         <AppBar platform="android" type="large" title="New claim" />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-16)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <TabBar
+          platform="ios"
+          activeTab={activeTab}
+          inboxBadge
+          onTabChange={setActiveTab}
+        />
+        <TabBar
+          platform="android"
+          activeTab={activeTab}
+          inboxBadge
+          onTabChange={setActiveTab}
+        />
       </div>
 
       <div

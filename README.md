@@ -85,6 +85,7 @@ One component per branch (`feat/<component-name>`), one PR each, same shape as `
 | ClaimCard          | ✅ shipped |
 | ClaimHeader        | ✅ shipped |
 | CoverageRow        | ✅ shipped |
+| TabBar             | ✅ shipped |
 
 ## Storybook
 
@@ -124,8 +125,9 @@ npx figma connect publish --token <figma-personal-access-token>
 | ClaimCard          | Claim card           | ✅       |
 | ClaimHeader        | Claim header         | ✅       |
 | CoverageRow        | Coverage row         | ✅       |
+| TabBar             | Tab bar              | ✅       |
 
-The Library file also has unpublished-to-code Figma components (CoverageSummary, TabBar) with no corresponding React component yet — no template exists for these until they're built.
+The Library file also has an unpublished-to-code Figma component (CoverageSummary) with no corresponding React component yet — no template exists for it until it's built.
 
 ## Roadmap
 
