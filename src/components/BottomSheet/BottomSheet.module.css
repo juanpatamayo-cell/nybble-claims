@@ -1,0 +1,168 @@
+.sheet {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 100%;
+  overflow: hidden;
+}
+
+.sheet--ios {
+  padding: var(--spacing-8) var(--spacing-16) var(--spacing-32);
+  border-radius: var(--radius-3xl) var(--radius-3xl) 0 0;
+  background: var(--bg-primary);
+}
+
+.sheet--android {
+  padding: var(--spacing-8) var(--spacing-16) var(--spacing-16);
+  border-radius: var(--radius-4xl) var(--radius-4xl) 0 0;
+  background: var(--bg-secondary);
+}
+
+/* Grabber/drag-handle dimensions aren't bound to a token in Figma (36x5 for
+   iOS, 32x4 for Android) — decorative thumb size, same treatment as
+   ClaimStatusStepper's indicator/dot. Android's happen to land exactly on
+   the 4px spacing scale, so those use tokens directly; iOS's (36/5) don't
+   and are hardcoded. */
+.handle {
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+}
+
+.handle--ios {
+  width: 36px;
+  height: 5px;
+  background: var(--border-primary);
+}
+
+.handle--android {
+  width: var(--spacing-32);
+  height: var(--spacing-4);
+  background: var(--fg-secondary);
+}
+
+.header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--spacing-8) 0;
+}
+
+.title {
+  flex: 1 1 0%;
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: break-word;
+  color: var(--text-primary);
+}
+
+.title--ios {
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-text-lg);
+  line-height: var(--line-height-text-lg);
+}
+
+.title--android {
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-xl);
+  line-height: var(--line-height-text-xl);
+}
+
+.closeButton {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--size-touch-target);
+  min-height: var(--size-touch-target);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--fg-secondary);
+  cursor: pointer;
+}
+
+.closeButton svg {
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.option {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  width: 100%;
+  min-height: var(--size-touch-target);
+  padding: var(--spacing-12) 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* 44px icon container isn't bound to a token in Figma (no matching
+   --spacing-* value); nearest is --spacing-48, matching the sibling
+   --size-touch-target scale and DocumentCard's analogous iconCircle. */
+.iconContainer {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-48);
+  height: var(--spacing-48);
+  border-radius: var(--radius-full);
+  background: var(--bg-brand-subtle);
+}
+
+.icon {
+  width: var(--size-icon-md);
+  height: var(--size-icon-md);
+  color: var(--fg-brand);
+}
+
+.text {
+  display: flex;
+  flex: 1 1 0%;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  align-items: flex-start;
+}
+
+.label {
+  width: 100%;
+  overflow-wrap: break-word;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-text-md);
+  line-height: var(--line-height-text-md);
+  color: var(--text-primary);
+}
+
+.description {
+  width: 100%;
+  overflow-wrap: break-word;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-tertiary);
+}
+
+.closeButton:focus-visible,
+.option:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: -2px;
+}

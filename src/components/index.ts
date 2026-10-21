@@ -1,4 +1,5 @@
 export * from './ActionBar';
+export * from './BottomSheet';
 export * from './CameraModule';
 export * from './ClaimStatusStepper';
 export * from './DocumentCard';
