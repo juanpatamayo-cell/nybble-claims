@@ -1,0 +1,72 @@
+.bar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-12);
+  width: 100%;
+  padding: var(--spacing-16);
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-secondary);
+}
+
+/* Extra bottom padding reserves space for the iOS home indicator, per
+   Figma's own usage note. Android has no equivalent system gesture area. */
+.bar--ios {
+  padding-bottom: var(--spacing-32);
+}
+
+.helper {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-tertiary);
+}
+
+.button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--size-touch-target);
+  padding: var(--spacing-12) var(--spacing-20);
+  border-radius: var(--radius-4xl);
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-text-md);
+  line-height: var(--line-height-text-md);
+  cursor: pointer;
+  /* No elevation/shadow tier exists in the token system; hardcoded like
+     DocumentCard's retake button. */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Figma binds this button's fill/border to the unbound primitive
+   color/brand/600 instead of a semantic token. --bg-brand-solid resolves
+   to the same primitive, so it's used for both fill and border (the
+   border matches the fill exactly in the design — flag this in the Figma
+   library so get_variable_defs resolves it directly next time). */
+.button--primary {
+  border: 1px solid var(--bg-brand-solid);
+  background: var(--bg-brand-solid);
+  color: var(--text-on-brand);
+}
+
+/* Same unbound-primitive substitution: color/base/white, color/gray/300
+   and color/gray/700 resolve to --bg-primary, --border-primary and
+   --text-secondary respectively. */
+.button--secondary {
+  border: 1px solid var(--border-primary);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
