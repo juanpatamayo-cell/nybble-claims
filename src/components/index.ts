@@ -1,4 +1,5 @@
 export * from './ActionBar';
+export * from './AppBar';
 export * from './BottomSheet';
 export * from './CameraModule';
 export * from './ClaimCard';

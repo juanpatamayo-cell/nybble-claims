@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   ActionBar,
+  AppBar,
   BottomSheet,
   CameraModule,
   ClaimCard,
@@ -282,6 +283,21 @@ export function Playground() {
           title="Vet visit — Happy Paws Clinic"
           subtitle="Luna · Claim NB-20418 · Sep 12"
         />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-16)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <AppBar platform="ios" type="standard" title="New claim" />
+        <AppBar platform="ios" type="large" title="New claim" />
+        <AppBar platform="android" type="standard" title="New claim" />
+        <AppBar platform="android" type="large" title="New claim" />
       </div>
 
       <div
