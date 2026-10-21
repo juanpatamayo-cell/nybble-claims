@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   ActionBar,
   AppBar,
+  BottomSheet,
   CameraModule,
   ClaimStatusStepper,
   DocumentCard,
@@ -249,6 +250,45 @@ export function Playground() {
           detail="Tabby cat · 2 years · Policy ending 8821"
           onSelect={() => setSelectedPet('max')}
         />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-16)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <div
+          style={{
+            background: 'var(--bg-tertiary)',
+            padding: 'var(--spacing-16)',
+          }}
+        >
+          <BottomSheet
+            platform="ios"
+            onClose={() => console.log('close')}
+            onTakePhoto={() => console.log('take photo')}
+            onChooseFromGallery={() => console.log('choose from gallery')}
+            onUploadFile={() => console.log('upload file')}
+          />
+        </div>
+        <div
+          style={{
+            background: 'var(--bg-tertiary)',
+            padding: 'var(--spacing-16)',
+          }}
+        >
+          <BottomSheet
+            platform="android"
+            onClose={() => console.log('close')}
+            onTakePhoto={() => console.log('take photo')}
+            onChooseFromGallery={() => console.log('choose from gallery')}
+            onUploadFile={() => console.log('upload file')}
+          />
+        </div>
       </div>
 
       {/* CameraModule fills its container's height — a real route would size
