@@ -1,3 +1,4 @@
+export * from './ActionBar';
 export * from './CameraModule';
 export * from './ClaimCard';
 export * from './ClaimStatusStepper';
