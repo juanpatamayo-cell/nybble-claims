@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   CameraModule,
+  ClaimHeader,
   ClaimStatusStepper,
   DocumentCard,
   EstimateCard,
@@ -206,6 +207,37 @@ export function Playground() {
           approvedAmount="$96.00"
           approvedAt="Sep 14"
           paymentDetail="$96.00 to account ••••4521 · Sep 16"
+        />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-16)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <ClaimHeader
+          status="in-review"
+          title="Vet visit — Happy Paws Clinic"
+          subtitle="Luna · Claim NB-20418 · Sep 12"
+        />
+        <ClaimHeader
+          status="action-required"
+          title="Vet visit — Happy Paws Clinic"
+          subtitle="Luna · Claim NB-20418 · Sep 12"
+        />
+        <ClaimHeader
+          status="approved"
+          title="Vet visit — Happy Paws Clinic"
+          subtitle="Luna · Claim NB-20418 · Sep 12"
+        />
+        <ClaimHeader
+          status="paid"
+          title="Vet visit — Happy Paws Clinic"
+          subtitle="Luna · Claim NB-20418 · Sep 12"
         />
       </div>
 
