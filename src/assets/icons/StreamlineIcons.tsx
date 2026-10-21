@@ -106,6 +106,112 @@ export function WarningDiamondIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function Camera1Icon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 18.369 16.678"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M12.2035 1H6.16555L4.66701 3.71449C4.3706 3.73947 4.07589 3.76502 3.78299 3.79032C2.53052 3.89847 1.4995 4.86346 1.31601 6.10713C1.14977 7.23379 1 8.39415 1 9.57923C1 10.7643 1.14977 11.9247 1.31601 13.0513C1.4995 14.2949 2.53052 15.2599 3.78299 15.3681C5.57998 15.5234 7.37938 15.678 9.18452 15.678C10.9897 15.678 12.7891 15.5234 14.586 15.3681C15.8385 15.2599 16.8696 14.2949 17.0531 13.0513C17.2192 11.9247 17.369 10.7643 17.369 9.57923C17.369 8.39415 17.2192 7.23379 17.0531 6.10713C16.8696 4.86346 15.8385 3.89847 14.586 3.79032C14.2914 3.76486 13.9968 3.73933 13.702 3.71449L12.2035 1Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.18452 12.1393C11.0702 12.1393 12.131 11.0786 12.131 9.19284C12.131 7.30712 11.0702 6.24641 9.18452 6.24641C7.29881 6.24641 6.2381 7.30712 6.2381 9.19284C6.2381 11.0786 7.29881 12.1393 9.18452 12.1393Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function Landscape2Icon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 18.369 18.369"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M1.33393 14.0065C1.5082 15.5785 2.76686 16.8367 4.33822 17.0174C5.90882 17.198 7.52872 17.369 9.1845 17.369C10.8403 17.369 12.4602 17.198 14.0308 17.0174C15.6021 16.8367 16.8608 15.5785 17.0351 14.0065C17.2084 12.4436 17.369 10.8319 17.369 9.18452C17.369 7.53717 17.2084 5.92542 17.0351 4.36263C16.8608 2.79054 15.6021 1.53233 14.0308 1.35163C12.4602 1.171 10.8403 1 9.1845 1C7.52872 1 5.90882 1.171 4.33822 1.35163C2.76686 1.53233 1.5082 2.79054 1.33393 4.36263C1.16069 5.92542 1 7.53717 1 9.18452C1 10.8319 1.16069 12.4436 1.33393 14.0065Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.33816 17.0174C2.7668 16.8367 1.50813 15.5785 1.33386 14.0065C1.25368 13.2831 1.17617 12.5491 1.11605 11.8061C2.41245 10.1593 3.93213 8.89475 5.48572 8.89475C8.63628 8.89475 11.6474 14.095 12.9398 17.1386C11.7134 17.2677 10.4595 17.369 9.18443 17.369C7.52866 17.369 5.90875 17.198 4.33816 17.0174Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.1997 8.46397C13.4403 8.46397 14.1382 7.76614 14.1382 6.52554C14.1382 5.28494 13.4403 4.5871 12.1997 4.5871C10.9591 4.5871 10.2613 5.28494 10.2613 6.52554C10.2613 7.76614 10.9591 8.46397 12.1997 8.46397Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function UploadBox1Icon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 18.2228 17.9958"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M3.54591 16.0595H3.11507C2.21412 16.0595 1.43365 15.4467 1.29746 14.5562C1.00543 12.6246 0.701622 9.10464 1.58162 5.58333C1.58162 5.58333 2.89115 2.30952 5.51019 1H12.7126C15.3316 2.30952 16.6411 5.58333 16.6411 5.58333C17.5211 9.10464 17.2173 12.626 16.9253 14.5549C16.7891 15.4467 16.0086 16.0608 15.1077 16.0608H14.6769"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M1.58162 5.58333H16.6411"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.11138 1V5.58333"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11.7985 12.7242C11.2511 11.6294 10.1538 10.532 9.059 9.98333C7.96293 10.532 6.86686 11.6281 6.31817 12.7242"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.05638 16.9958V10.0135"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function BrokenLinkIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
