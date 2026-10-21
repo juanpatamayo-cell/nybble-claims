@@ -2,6 +2,7 @@ export * from './ActionBar';
 export * from './BottomSheet';
 export * from './CameraModule';
 export * from './ClaimCard';
+export * from './ClaimHeader';
 export * from './ClaimStatusStepper';
 export * from './CoverageRow';
 export * from './DocumentCard';
