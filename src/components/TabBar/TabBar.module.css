@@ -1,0 +1,170 @@
+.bar {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  padding: 0 var(--spacing-8);
+}
+
+.bar--ios {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: var(--spacing-8);
+  padding-bottom: var(--spacing-12);
+}
+
+.bar--android {
+  align-items: flex-start;
+  padding-top: var(--spacing-12);
+  padding-bottom: var(--spacing-16);
+  background: var(--bg-secondary);
+}
+
+/* iOS's floating pill bar. Figma binds height to a plain 64px (exact
+   --spacing-64), which makes --radius-full render identically to the
+   source's literal 32px corner radius — not an approximation, 32 is
+   exactly half of 64. */
+.surface {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--spacing-64);
+  padding: var(--spacing-2) var(--spacing-8);
+  border-radius: var(--radius-full);
+  /*
+   * Figma binds this border to an unbound rgba(232,232,242,0.9) - every
+   * other border in this file resolves to a bound variable, this one
+   * doesn't. Nearest existing token for a subtle floating-surface border.
+   * Flag for the Figma library: bind this to --border-secondary.
+   */
+  border: 1px solid var(--border-secondary);
+  background: var(--bg-primary);
+  /*
+   * No elevation/shadow tier exists in the token system (same documented
+   * gotcha as DocumentCard's retake button) - hardcoded to match Figma's
+   * two-layer drop shadow.
+   */
+  box-shadow:
+    0 2px 3px 0 rgba(41, 36, 69, 0.05),
+    0 8px 10px 0 rgba(41, 36, 69, 0.1);
+}
+
+.tab {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--size-touch-target);
+  min-height: var(--size-touch-target);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tab--ios {
+  gap: var(--spacing-2);
+  padding: var(--spacing-8) 0;
+  border-radius: var(--radius-3xl);
+}
+
+.tab--android {
+  gap: var(--spacing-4);
+}
+
+/*
+ * Figma binds the active iOS tab item's background to the unbound
+ * primitive color/brand/100, not a semantic variable (every other color
+ * here resolves to a semantic token). Using the nearest semantic tier
+ * (--bg-brand-subtle, one step lighter) instead of a raw primitive, per
+ * CLAUDE.md's rule against primitives in components - they don't adapt
+ * for dark mode.
+ */
+.tab--active.tab--ios {
+  background: var(--bg-brand-subtle);
+}
+
+.iconWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*
+ * Android's own source flattens icon+pill into one image asset rather
+ * than a separately bound layer, so this reuses the same semantic tier
+ * as iOS's active indicator (--bg-brand-subtle) for the same "selected"
+ * meaning, inferred for consistency rather than read off a bound layer.
+ */
+.iconWrap--android {
+  width: var(--spacing-64);
+  height: var(--spacing-32);
+  border-radius: var(--radius-full);
+}
+
+.iconWrap--active.iconWrap--android {
+  background: var(--bg-brand-subtle);
+}
+
+.iconBox {
+  position: relative;
+  display: flex;
+}
+
+.icon {
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+}
+
+.icon--active {
+  color: var(--fg-brand);
+}
+
+.icon--inactive {
+  color: var(--fg-primary);
+}
+
+.bar--android .icon--inactive {
+  color: var(--fg-secondary);
+}
+
+.badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--bg-error-solid);
+}
+
+.label {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-size: var(--font-size-text-xs);
+  line-height: var(--line-height-text-xs);
+  white-space: nowrap;
+}
+
+.label--active {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-brand);
+}
+
+.label--inactive {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.bar--android .label--inactive {
+  color: var(--text-tertiary);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: -2px;
+}
