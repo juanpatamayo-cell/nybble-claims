@@ -142,6 +142,11 @@ Component requirements:
 - Icons sized with `--size-icon-*` so they scale in large text.
 - Verify every component in 4 combinations: light/dark × default/large text.
 - No responsive breakpoints are defined as tokens. The flow is mobile-first; use fluid layout (flex/grid, `max-width`) and only add media queries if a design actually changes layout.
+  - This was re-checked deliberately, not assumed (issue #38): no breakpoint/viewport variable exists in any of the file's 3 variable collections (`Primitives`, `Semantic`, `Typography & Sizing` — confirmed via `figma.variables.getLocalVariableCollectionsAsync()`). The only breakpoint-shaped numbers in the file (640/768/1024/1280, under Foundations → "Spacing, radius & grids" → "Grid layouts") are static documentation diagrams inherited from the generic Untitled UI base kit this library was built on — illustrative, not bound to anything, and not used by any shipped claims component. Revisit this rule only if a design in Figma actually gets a distinct tablet/desktop layout; propose token names/values at that point rather than guessing ahead of the design.
+
+## Motion
+
+No motion/animation tokens exist (no `--duration-*`, `--easing-*`, etc.) and none are needed yet — checked deliberately (issue #39), not an oversight: no Figma prototype reactions (Smart Animate or otherwise) exist on any node across every shipped-or-planned claims/mobile-shell page, and there's no dedicated "Motion" page or duration/easing variable anywhere in the file. If a future Figma update adds a real transition (prototype reaction, Smart Animate spec, or a documented Motion page), extract it into `tokens/figma/` through the normal pipeline — don't hardcode a duration/easing value into component CSS to match something you eyeballed in a prototype.
 
 ## Components
 
