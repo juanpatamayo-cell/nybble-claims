@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   CameraModule,
   ClaimStatusStepper,
+  CoverageRow,
   DocumentCard,
   EstimateCard,
   PetSelector,
@@ -207,6 +208,32 @@ export function Playground() {
           approvedAt="Sep 14"
           paymentDetail="$96.00 to account ••••4521 · Sep 16"
         />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-12)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+          padding: 'var(--spacing-16)',
+          border: '1px solid var(--border-secondary)',
+          borderRadius: 'var(--radius-2xl)',
+          background: 'var(--bg-primary)',
+        }}
+      >
+        <CoverageRow
+          type="covered"
+          label="Exam and consultation"
+          amount="$60.00"
+        />
+        <CoverageRow
+          type="covered"
+          label="Prescription medication"
+          amount="$25.00"
+        />
+        <CoverageRow type="not-covered" label="Grooming" amount="$40.00" />
       </div>
 
       <div
