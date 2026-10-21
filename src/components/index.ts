@@ -1,3 +1,4 @@
+export * from './AppBar';
 export * from './CameraModule';
 export * from './ClaimStatusStepper';
 export * from './DocumentCard';

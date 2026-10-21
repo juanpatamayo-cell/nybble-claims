@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  AppBar,
   CameraModule,
   ClaimStatusStepper,
   DocumentCard,
@@ -207,6 +208,21 @@ export function Playground() {
           approvedAt="Sep 14"
           paymentDetail="$96.00 to account ••••4521 · Sep 16"
         />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-16)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <AppBar platform="ios" type="standard" title="New claim" />
+        <AppBar platform="ios" type="large" title="New claim" />
+        <AppBar platform="android" type="standard" title="New claim" />
+        <AppBar platform="android" type="large" title="New claim" />
       </div>
 
       <div
