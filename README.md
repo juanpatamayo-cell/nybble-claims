@@ -79,6 +79,7 @@ One component per branch (`feat/<component-name>`), one PR each, same shape as `
 | ClaimStatusStepper | ✅ shipped |
 | PetSelector        | ✅ shipped |
 | CameraModule       | ✅ shipped |
+| ActionBar          | ✅ shipped |
 | BottomSheet        | ✅ shipped |
 
 ## Storybook
@@ -113,9 +114,10 @@ npx figma connect publish --token <figma-personal-access-token>
 | ClaimStatusStepper | Claim status stepper | ✅       |
 | PetSelector        | Pet selector card    | ✅       |
 | CameraModule       | Camera overlay       | ✅       |
+| ActionBar          | Action bar           | ✅       |
 | BottomSheet        | Bottom sheet         | ✅       |
 
-The Library file also has unpublished-to-code Figma components (ClaimCard, CoverageRow, ClaimHeader, CoverageSummary, AppBar, TabBar, ActionBar) with no corresponding React component yet — no template exists for these until they're built.
+The Library file also has unpublished-to-code Figma components (ClaimCard, CoverageRow, ClaimHeader, CoverageSummary, AppBar, TabBar) with no corresponding React component yet — no template exists for these until they're built.
 
 ## Roadmap
 
