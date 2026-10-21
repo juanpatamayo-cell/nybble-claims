@@ -5,6 +5,7 @@ import {
   CameraModule,
   ClaimCard,
   ClaimStatusStepper,
+  CoverageRow,
   DocumentCard,
   EstimateCard,
   PetSelector,
@@ -249,6 +250,32 @@ export function Playground() {
           amount="$96.00"
           onPress={() => console.log('open claim')}
         />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-12)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+          padding: 'var(--spacing-16)',
+          border: '1px solid var(--border-secondary)',
+          borderRadius: 'var(--radius-2xl)',
+          background: 'var(--bg-primary)',
+        }}
+      >
+        <CoverageRow
+          type="covered"
+          label="Exam and consultation"
+          amount="$60.00"
+        />
+        <CoverageRow
+          type="covered"
+          label="Prescription medication"
+          amount="$25.00"
+        />
+        <CoverageRow type="not-covered" label="Grooming" amount="$40.00" />
       </div>
 
       <div
