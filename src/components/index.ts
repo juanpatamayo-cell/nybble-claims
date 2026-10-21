@@ -1,6 +1,7 @@
 export * from './ActionBar';
 export * from './BottomSheet';
 export * from './CameraModule';
+export * from './ClaimCard';
 export * from './ClaimStatusStepper';
 export * from './DocumentCard';
 export * from './EstimateCard';
