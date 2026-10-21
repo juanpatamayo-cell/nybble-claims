@@ -6,6 +6,7 @@ import {
   ClaimCard,
   ClaimHeader,
   ClaimStatusStepper,
+  CoverageRow,
   DocumentCard,
   EstimateCard,
   PetSelector,
@@ -281,6 +282,32 @@ export function Playground() {
           title="Vet visit — Happy Paws Clinic"
           subtitle="Luna · Claim NB-20418 · Sep 12"
         />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-12)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+          padding: 'var(--spacing-16)',
+          border: '1px solid var(--border-secondary)',
+          borderRadius: 'var(--radius-2xl)',
+          background: 'var(--bg-primary)',
+        }}
+      >
+        <CoverageRow
+          type="covered"
+          label="Exam and consultation"
+          amount="$60.00"
+        />
+        <CoverageRow
+          type="covered"
+          label="Prescription medication"
+          amount="$25.00"
+        />
+        <CoverageRow type="not-covered" label="Grooming" amount="$40.00" />
       </div>
 
       <div
