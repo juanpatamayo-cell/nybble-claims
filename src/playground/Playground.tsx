@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  ActionBar,
   CameraModule,
   ClaimStatusStepper,
   CoverageRow,
@@ -272,6 +273,41 @@ export function Playground() {
         }}
       >
         <CameraModule onCapture={() => console.log('capture')} />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-16)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <ActionBar
+          platform="ios"
+          layout="single"
+          onPrimaryAction={() => console.log('continue')}
+        />
+        <ActionBar
+          platform="ios"
+          layout="stacked"
+          showHelper
+          onPrimaryAction={() => console.log('continue')}
+          onSecondaryAction={() => console.log('save for later')}
+        />
+        <ActionBar
+          platform="android"
+          layout="single"
+          onPrimaryAction={() => console.log('continue')}
+        />
+        <ActionBar
+          platform="android"
+          layout="stacked"
+          showHelper
+          onPrimaryAction={() => console.log('continue')}
+          onSecondaryAction={() => console.log('save for later')}
+        />
       </div>
     </div>
   );
