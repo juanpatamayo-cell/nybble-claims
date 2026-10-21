@@ -1,0 +1,99 @@
+.header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+  width: 100%;
+}
+
+.identity {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  overflow-wrap: break-word;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-text-lg);
+  line-height: var(--line-height-text-lg);
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-secondary);
+}
+
+.badge {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--spacing-6);
+  padding: var(--spacing-2) var(--spacing-8);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  white-space: nowrap;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+}
+
+.badge--in-review {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.dot--in-review {
+  background: var(--fg-secondary);
+}
+
+.badge--approved {
+  background: var(--bg-success-subtle);
+  color: var(--text-success);
+}
+
+.dot--approved {
+  background: var(--fg-success);
+}
+
+.badge--paid {
+  background: var(--bg-brand-subtle);
+  color: var(--text-brand);
+}
+
+.dot--paid {
+  background: var(--fg-brand);
+}
+
+/*
+ * Same unbound Yellow/500-700-50 style found on ClaimCard's identical
+ * "Action required" badge (confirmed again via get_variable_defs on this
+ * node) — reusing the same warning-token resolution for consistency. See
+ * ClaimCard.module.css for the full note. Flag for the Figma library: bind
+ * this badge to the warning color set too.
+ */
+.badge--action-required {
+  background: var(--bg-warning-subtle);
+  color: var(--text-warning);
+}
+
+.dot--action-required {
+  background: var(--fg-warning);
+}

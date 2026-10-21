@@ -5,6 +5,7 @@ import {
   BottomSheet,
   CameraModule,
   ClaimCard,
+  ClaimHeader,
   ClaimStatusStepper,
   CoverageRow,
   DocumentCard,
@@ -250,6 +251,37 @@ export function Playground() {
           subtitle="Luna · Sep 12"
           amount="$96.00"
           onPress={() => console.log('open claim')}
+        />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-16)',
+          maxWidth: '400px',
+          marginTop: 'var(--spacing-24)',
+        }}
+      >
+        <ClaimHeader
+          status="in-review"
+          title="Vet visit — Happy Paws Clinic"
+          subtitle="Luna · Claim NB-20418 · Sep 12"
+        />
+        <ClaimHeader
+          status="action-required"
+          title="Vet visit — Happy Paws Clinic"
+          subtitle="Luna · Claim NB-20418 · Sep 12"
+        />
+        <ClaimHeader
+          status="approved"
+          title="Vet visit — Happy Paws Clinic"
+          subtitle="Luna · Claim NB-20418 · Sep 12"
+        />
+        <ClaimHeader
+          status="paid"
+          title="Vet visit — Happy Paws Clinic"
+          subtitle="Luna · Claim NB-20418 · Sep 12"
         />
       </div>
 
