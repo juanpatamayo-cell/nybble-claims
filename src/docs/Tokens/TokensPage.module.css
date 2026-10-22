@@ -1,0 +1,166 @@
+.page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  width: 100%;
+  padding: var(--spacing-24);
+  background: var(--bg-primary);
+}
+
+.intro {
+  margin: 0;
+  max-width: 64ch;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-md);
+  line-height: var(--line-height-text-md);
+  color: var(--text-secondary);
+}
+
+.pageTitle {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-display-xs);
+  line-height: var(--line-height-display-xs);
+  color: var(--text-primary);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-text-lg);
+  line-height: var(--line-height-text-lg);
+  color: var(--text-primary);
+}
+
+/* Color / radius swatches */
+
+.swatchGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-16);
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+  margin: 0;
+}
+
+.swatchFill,
+.radiusBox {
+  box-sizing: border-box;
+  width: var(--spacing-64);
+  height: var(--spacing-64);
+  /* 1px border isn't a token (see CLAUDE.md's "1px borders ... aren't
+     tokens" gotcha) — needed so white/transparent swatches (e.g.
+     --bg-primary, --text-on-brand) stay visible against the page bg. */
+  border: 1px solid var(--border-secondary);
+}
+
+.radiusBox {
+  background: var(--bg-brand-subtle);
+  border-color: var(--border-brand);
+}
+
+.swatchCaption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.tokenName {
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-xs);
+  line-height: var(--line-height-text-xs);
+  color: var(--text-primary);
+}
+
+.resolvedValue {
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-xs);
+  line-height: var(--line-height-text-xs);
+  color: var(--text-tertiary);
+}
+
+/* Typography */
+
+.typeColumns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-32);
+}
+
+.typeColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  min-width: 0;
+}
+
+.typeColumnTitle {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-secondary);
+}
+
+.specimen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.specimenSample {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.specimenMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--spacing-8);
+  margin: 0;
+}
+
+/* Spacing */
+
+.spacingList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.spacingRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.spacingTrack {
+  display: flex;
+  align-items: center;
+  flex: 1 1 0%;
+}
+
+.spacingBar {
+  height: var(--spacing-16);
+  background: var(--bg-brand-solid);
+  border-radius: var(--radius-xxs);
+}
