@@ -1,16 +1,11 @@
 import type { ClaimStatus } from '../ClaimStatusStepper';
+import { StatusBadge } from '../StatusBadge';
 import styles from './ClaimHeader.module.css';
 
-const STATUS_LABEL: Record<ClaimStatus, string> = {
-  'in-review': 'In review',
-  'action-required': 'Action required',
-  approved: 'Approved',
-  paid: 'Paid',
-};
-
 export type ClaimHeaderProps = {
-  /** Figma variant `Status`. Same badge as `ClaimCard` — see that component's
-   * module.css for the token-mismatch note on the `action-required` color. */
+  /** Figma variant `Status`. Same badge as `ClaimCard` — both share the
+   * `StatusBadge` building block (see that component's module.css for the
+   * token-mismatch note on the `action-required` color). */
   status?: ClaimStatus;
   /** Figma text property `Title`, e.g. "Vet visit — Happy Paws Clinic". */
   title: string;
@@ -29,10 +24,7 @@ export function ClaimHeader({
         <p className={styles.title}>{title}</p>
         <p className={styles.subtitle}>{subtitle}</p>
       </div>
-      <span className={`${styles.badge} ${styles[`badge--${status}`]}`}>
-        <span className={`${styles.dot} ${styles[`dot--${status}`]}`} />
-        {STATUS_LABEL[status]}
-      </span>
+      <StatusBadge status={status} />
     </div>
   );
 }

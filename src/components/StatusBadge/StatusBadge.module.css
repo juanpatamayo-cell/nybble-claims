@@ -1,0 +1,66 @@
+.badge {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--spacing-6);
+  padding: var(--spacing-2) var(--spacing-8);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  white-space: nowrap;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+}
+
+.badge--in-review {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.dot--in-review {
+  background: var(--fg-secondary);
+}
+
+.badge--approved {
+  background: var(--bg-success-subtle);
+  color: var(--text-success);
+}
+
+.dot--approved {
+  background: var(--fg-success);
+}
+
+.badge--paid {
+  background: var(--bg-brand-subtle);
+  color: var(--text-brand);
+}
+
+.dot--paid {
+  background: var(--fg-brand);
+}
+
+/*
+ * Figma's "Action required" badge binds to an unbound Yellow/500-700-50
+ * style, not a variable (confirmed via get_variable_defs on both ClaimCard
+ * and ClaimHeader — every other badge variant resolves to a bound
+ * color/* variable, this one doesn't). ClaimStatusStepper already faced
+ * the identical "action-required" status and settled on the warning
+ * semantic tokens for it; reusing that decision here instead of inventing
+ * a yellow token or hardcoding the Figma hex. Flag for the Figma library:
+ * bind this badge to the warning color set.
+ */
+.badge--action-required {
+  background: var(--bg-warning-subtle);
+  color: var(--text-warning);
+}
+
+.dot--action-required {
+  background: var(--fg-warning);
+}
