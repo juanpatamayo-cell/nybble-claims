@@ -1,12 +1,6 @@
 import type { ClaimStatus } from '../ClaimStatusStepper';
+import { StatusBadge } from '../StatusBadge';
 import styles from './ClaimCard.module.css';
-
-const STATUS_LABEL: Record<ClaimStatus, string> = {
-  'in-review': 'In review',
-  'action-required': 'Action required',
-  approved: 'Approved',
-  paid: 'Paid',
-};
 
 // Not Figma text properties — these are the fixed per-status messages baked
 // into each Status variant in Figma (confirmed via componentPropertyDefinitions:
@@ -52,10 +46,7 @@ export function ClaimCard({
           <p className={styles.title}>{title}</p>
           <p className={styles.subtitle}>{subtitle}</p>
         </div>
-        <span className={`${styles.badge} ${styles[`badge--${status}`]}`}>
-          <span className={`${styles.dot} ${styles[`dot--${status}`]}`} />
-          {STATUS_LABEL[status]}
-        </span>
+        <StatusBadge status={status} />
       </div>
 
       <div className={styles.amountRow}>
