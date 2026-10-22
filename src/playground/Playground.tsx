@@ -8,6 +8,7 @@ import {
   ClaimHeader,
   ClaimStatusStepper,
   CoverageRow,
+  CoverageSummary,
   DocumentCard,
   EstimateCard,
   PetSelector,
@@ -351,6 +352,26 @@ export function Playground() {
           amount="$25.00"
         />
         <CoverageRow type="not-covered" label="Grooming" amount="$40.00" />
+      </div>
+
+      <div style={{ maxWidth: '400px', marginTop: 'var(--spacing-24)' }}>
+        <CoverageSummary
+          items={[
+            {
+              type: 'covered',
+              label: 'Exam and consultation',
+              amount: '$60.00',
+            },
+            {
+              type: 'covered',
+              label: 'Treatment and medication',
+              amount: '$110.00',
+            },
+            { type: 'not-covered', label: 'Food', amount: '$10.00' },
+            { type: 'not-covered', label: 'Grooming', amount: '$5.00' },
+          ]}
+          footnote="Food and grooming are excluded by your plan, so they are not counted toward your reimbursement."
+        />
       </div>
 
       <div

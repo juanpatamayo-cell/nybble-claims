@@ -6,6 +6,7 @@ export * from './ClaimCard';
 export * from './ClaimHeader';
 export * from './ClaimStatusStepper';
 export * from './CoverageRow';
+export * from './CoverageSummary';
 export * from './DocumentCard';
 export * from './EstimateCard';
 export * from './PetSelector';
