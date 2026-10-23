@@ -43,12 +43,12 @@ const withThemeAttrs: Decorator = (Story, context) => {
 
 const preview: Preview = {
   parameters: {
-    // Keeps the Tokens docs page above the component stories in the
-    // sidebar instead of Storybook's default alphabetical order (which
-    // would put "Components" before "Tokens").
+    // Keeps Tokens (docs) and Flows (composed screens) above the
+    // individual component stories in the sidebar, instead of Storybook's
+    // default alphabetical order (which would put "Components" first).
     options: {
       storySort: {
-        order: ['Tokens', 'Components'],
+        order: ['Tokens', 'Flows', 'Components'],
       },
     },
     controls: {
