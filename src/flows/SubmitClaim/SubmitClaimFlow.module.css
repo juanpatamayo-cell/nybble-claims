@@ -1,0 +1,90 @@
+.page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  width: 100%;
+  padding: var(--spacing-24);
+  background: var(--bg-secondary);
+}
+
+.pageTitle {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-display-xs);
+  line-height: var(--line-height-display-xs);
+  color: var(--text-primary);
+}
+
+.intro {
+  margin: 0;
+  max-width: 64ch;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-text-md);
+  line-height: var(--line-height-text-md);
+  color: var(--text-secondary);
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--spacing-32);
+}
+
+.screenWrap {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
+.caption {
+  margin: 0;
+  font-family: var(--font-family-body), system-ui, sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+  color: var(--text-secondary);
+}
+
+/* A mock phone frame around the real AppBar/ActionBar/TabBar — not a
+   reusable design-system card, but still a new card-like surface, so it
+   follows CLAUDE.md's --radius-2xl rule for those ("New card-like
+   components should follow --radius-2xl too"). */
+.screen {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  min-height: 720px;
+  overflow: hidden;
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-2xl);
+  background: var(--bg-primary);
+}
+
+.screenBody {
+  box-sizing: border-box;
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  padding: var(--spacing-16);
+  overflow-y: auto;
+}
+
+/* Step 3 (CameraModule) is a full-bleed overlay by design — it fills its
+   container's height itself, so the frame adds no padding here. */
+.screenBodyFullBleed {
+  flex: 1 1 0%;
+  overflow: hidden;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
