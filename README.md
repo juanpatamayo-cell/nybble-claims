@@ -99,6 +99,15 @@ Every component has a `.stories.tsx` colocated next to it, with `tags: ['autodoc
 
 Published automatically to GitHub Pages on every push to `main` by the **Storybook** GitHub Action.
 
+## Testing
+
+```bash
+npm run test       # unit/interaction tests (Vitest + React Testing Library, jsdom)
+npm run test:a11y  # Storybook a11y checks (Vitest + addon-vitest, Chromium)
+```
+
+These are two separate things: `test:a11y` is an accessibility gate on each story's default render; `npm run test` is actual branching-logic coverage for components colocated as `<Name>.test.tsx` — e.g. `DocumentCard`'s progress clamping, `ClaimStatusStepper`'s per-`status` step rendering, `EstimateCard`'s full/compact breakdown rendering. Not every component has a test file; one's added when there's real logic to break, not to pad coverage. Both run in CI.
+
 ## Code Connect
 
 Every component has a colocated `<Name>.figma.ts` — a [Code Connect](https://www.figma.com/code-connect-docs/) parserless template mapping its Figma component to the matching React component, so Figma Dev Mode can show the real code snippet (with the right props filled in) instead of generic markup.
