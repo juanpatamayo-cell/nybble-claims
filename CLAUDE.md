@@ -29,17 +29,18 @@ build/css/             Generated, committed. Never edit by hand.
   text-large.css         [data-text-size="large"] (font-size, line-height, size only)
 build/json/tokens.json Flat JSON of the default build (for JS / React Native)
 src/
-  components/<Name>/     One folder per component: <Name>.tsx, <Name>.module.css, index.ts, <Name>.stories.tsx, <Name>.figma.ts
+  components/<Name>/     One folder per component: <Name>.tsx, <Name>.module.css, index.ts, <Name>.stories.tsx, <Name>.figma.ts, optionally <Name>.test.tsx
   components/index.ts    Re-exports every component
   playground/            Playground.tsx — renders every component/variant for manual QA
   styles/global.css      Resets + font-smoothing only; component styles live in their module.css
+  test/setup.ts          jest-dom matchers + RTL cleanup, loaded by the `unit` Vitest project (see "Testing" below)
   main.tsx               Loads the three token stylesheets + fonts, mounts Playground
 .storybook/             main.ts (addons), preview.tsx (token/font imports, theme+text-size toolbar globals)
 figma.config.json       Code Connect CLI config (parser, include glob). Not usable until the Library file is on an Org/Enterprise Figma plan — see README's "Code Connect" section.
 .github/workflows/tokens.yml      CI: rebuilds tokens and fails if build/ is stale
 .github/workflows/storybook.yml   CI: builds Storybook on every push/PR, deploys to Pages from main
-.github/workflows/ci.yml          CI: typecheck, lint, format:check, build, and Storybook a11y checks (npm run test:a11y) on every push/PR
-vite.config.ts          Vite config + the `storybook` Vitest project (addon-vitest, Playwright/Chromium) that test:a11y runs
+.github/workflows/ci.yml          CI: typecheck, lint, format:check, build, unit tests (npm run test), and Storybook a11y checks (npm run test:a11y) on every push/PR
+vite.config.ts          Vite config + two Vitest projects: `unit` (jsdom + RTL, test:a11y's sibling — see "Testing" below) and `storybook` (addon-vitest, Playwright/Chromium) that test:a11y runs
 eslint.config.js        Flat ESLint config (typescript-eslint + react-hooks + react-refresh), deferring formatting to Prettier
 .prettierrc.json / .prettierignore   Prettier config — see "Linting and formatting" below
 ```
@@ -171,6 +172,15 @@ Stack is decided: React + Vite, CSS Modules. Don't re-ask the user — follow `s
 - `@storybook/addon-a11y` runs real axe-core checks per story, gated at `test: 'error'` in `.storybook/preview.tsx` — a violation fails the suite, it's not just a panel warning. `npm run test:a11y` (`vitest run --project=storybook`) runs every `.stories.tsx` as a Vitest browser test (via `@storybook/addon-vitest`, headless Chromium through Playwright, config in `vite.config.ts`'s `storybook` project) and is required in CI (`.github/workflows/ci.yml`, alongside `typecheck` and `build`).
   - This reverses the earlier "no addon-vitest/Playwright" call from when Storybook was first set up — that was right when Storybook was doc-only, but a real CI a11y gate needs a real browser to render components and compute things like color contrast; jsdom can't do that accurately. `addon-vitest` here is scoped to accessibility only (not interaction/snapshot testing, not Chromatic/visual-regression) — still deliberately light, just not as light as before.
   - A failure means an axe violation was found on that story's default render — fix the underlying token/CSS, don't silence the story or weaken the rule to get green.
+
+## Testing
+
+Storybook (above) and this section cover two different things and shouldn't be conflated: Storybook/`test:a11y` is documentation plus an accessibility gate on each story's default render; this section is actual unit/interaction coverage of each component's branching logic, independent of Storybook.
+
+- `npm run test` (`vitest run --project=unit`) runs every colocated `<Name>.test.tsx` under a jsdom environment with React Testing Library — not a browser, and not routed through any `.stories.tsx` file. It's a separate Vitest project from `storybook` (`test:a11y`), set up side-by-side in `vite.config.ts`'s `test.projects`. Required in CI (`.github/workflows/ci.yml`), alongside `typecheck`, `lint`, `format:check`, and `build`.
+- `src/test/setup.ts` is the `unit` project's `setupFiles` entry: it extends Vitest's `expect` with `@testing-library/jest-dom`'s matchers and manually wires React Testing Library's `cleanup` into `afterEach` (the project uses explicit `vitest` imports rather than `globals: true`, so RTL's own auto-cleanup detection doesn't fire — without this, leftover DOM from one test leaks into the next in the same file).
+- Not every component needs a test file — add one when a component has real branching logic to break (conditional rendering per variant/state, a derived/clamped value, a callback that must fire with the right argument). A component that's pure markup plus token styling doesn't need one just to pad coverage.
+- Current coverage: `DocumentCard` (progress clamping, state branching, action callbacks), `ClaimStatusStepper` (which steps render per `status`), `EstimateCard` (full vs. compact breakdown/footnote rendering, info-button callback).
 
 ## Icons
 
