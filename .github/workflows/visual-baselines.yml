@@ -1,0 +1,35 @@
+name: Regenerate visual baselines
+
+# Manual-only (workflow_dispatch) — not run on every push/PR, see ci.yml for
+# the actual gate that compares against these baselines. Run this on-demand
+# whenever a baseline needs to be (re)created or updated: a new component's
+# first PR, or an intentional visual change to an existing one.
+#
+# Screenshot comparison is pixel-sensitive to font rendering, which differs
+# between operating systems — a baseline generated on a contributor's own
+# machine (e.g. macOS) would cause false failures once compared against a
+# real run on ubuntu-latest (what ci.yml actually uses). Running this here
+# generates baselines in the exact same environment that later verifies
+# them. Download the "visual-baselines" artifact this run produces and
+# commit its contents to src/test/visual/__screenshots__/ directly — this
+# workflow never commits on its own.
+on:
+  workflow_dispatch:
+
+jobs:
+  update-baselines:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run tokens
+      - run: npx playwright install --with-deps chromium
+      - run: npx vitest run --project=visual --update=new
+      - uses: actions/upload-artifact@v7
+        with:
+          name: visual-baselines
+          path: src/test/visual/__screenshots__/

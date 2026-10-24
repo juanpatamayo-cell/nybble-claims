@@ -29,6 +29,7 @@ src/
   components/<Name>/               One folder per component (.tsx, .module.css, index.ts, .stories.tsx)
   flows/<Name>/                    Composed multi-screen walk-throughs built from existing components (.tsx, .module.css, index.ts, .stories.tsx) — not components themselves, see "Flows" below
   playground/                      Playground.tsx — every component/variant, for manual QA
+  test/visual/                     Visual regression suite + committed screenshot baselines, see "Testing" below
   assets/                          Illustrations and exported icons
   main.tsx                         Loads token stylesheets + fonts, mounts the playground
 .storybook/                      ← Storybook config (main.ts, preview.tsx)
@@ -107,11 +108,14 @@ Every component so far had only been verified in isolation (Playground, Storyboo
 ## Testing
 
 ```bash
-npm run test       # unit/interaction tests (Vitest + React Testing Library, jsdom)
-npm run test:a11y  # Storybook a11y checks (Vitest + addon-vitest, Chromium)
+npm run test         # unit/interaction tests (Vitest + React Testing Library, jsdom)
+npm run test:a11y    # Storybook a11y checks (Vitest + addon-vitest, Chromium)
+npm run test:visual  # pixel-diff every component story in light/dark (Vitest + toMatchScreenshot, Chromium)
 ```
 
-These are two separate things: `test:a11y` is an accessibility gate on each story's default render; `npm run test` is actual branching-logic coverage for components colocated as `<Name>.test.tsx` — e.g. `DocumentCard`'s progress clamping, `ClaimStatusStepper`'s per-`status` step rendering, `EstimateCard`'s full/compact breakdown rendering. Not every component has a test file; one's added when there's real logic to break, not to pad coverage. Both run in CI.
+Three separate things: `test:a11y` is an accessibility gate on each story's default render; `npm run test` is actual branching-logic coverage for components colocated as `<Name>.test.tsx` — e.g. `DocumentCard`'s progress clamping, `ClaimStatusStepper`'s per-`status` step rendering, `EstimateCard`'s full/compact breakdown rendering; `npm run test:visual` catches unintended pixel-level changes (a token edit that shifts spacing somewhere nobody checked manually) neither of the other two is built to catch. Not every component has a `.test.tsx` file — one's added when there's real logic to break, not to pad coverage. All three run in CI.
+
+Visual baselines (`src/test/visual/__screenshots__/`) are never generated locally — font rendering differs enough between operating systems that a macOS-captured baseline would false-fail once CI (Ubuntu) compares against it. Run the manual **Regenerate visual baselines** GitHub Action instead (`.github/workflows/visual-baselines.yml`) and commit the artifact it produces.
 
 ## Code Connect
 

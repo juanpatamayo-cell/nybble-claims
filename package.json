@@ -16,7 +16,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest run --project=unit",
-    "test:a11y": "vitest run --project=storybook"
+    "test:a11y": "vitest run --project=storybook",
+    "test:visual": "vitest run --project=visual"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
