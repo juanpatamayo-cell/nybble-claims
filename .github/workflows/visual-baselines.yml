@@ -39,8 +39,15 @@ jobs:
       - run: npm ci
       - run: npm run tokens
       - run: npx playwright install --with-deps chromium
-      - run: npx vitest run --project=visual --update=new
+      - name: Update baselines
+        # --update=new always reports a non-zero exit for any screenshot it
+        # creates or changes — that's the point of running this workflow,
+        # not a real failure, so the job shouldn't red out over it.
+        continue-on-error: true
+        run: npx vitest run --project=visual --update=new
       - uses: actions/upload-artifact@v7
+        # Upload regardless of the step above — see its own comment.
+        if: always()
         with:
           name: visual-baselines
           path: src/test/visual/__screenshots__/
