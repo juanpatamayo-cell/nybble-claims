@@ -27,6 +27,7 @@ build/css/                       ← generated, committed
 build/json/tokens.json           ← flat JSON (for JS / React Native)
 src/
   components/<Name>/               One folder per component (.tsx, .module.css, index.ts, .stories.tsx)
+  flows/<Name>/                    Composed multi-screen walk-throughs built from existing components (.tsx, .module.css, index.ts, .stories.tsx) — not components themselves, see "Flows" below
   playground/                      Playground.tsx — every component/variant, for manual QA
   assets/                          Illustrations and exported icons
   main.tsx                         Loads token stylesheets + fonts, mounts the playground
@@ -98,6 +99,10 @@ npm run build-storybook   # static export to storybook-static/
 Every component has a `.stories.tsx` colocated next to it, with `tags: ['autodocs']` so Storybook generates a props-table docs page from the same JSDoc comments used in the component source — no separate documentation to keep in sync. The toolbar has **Theme** (light/dark) and **Text size** (default/large) globals that set `data-theme`/`data-text-size` on `<html>`, mirroring the Playground's toggle buttons, so every story is checkable in all 4 combinations. [`@storybook/addon-a11y`](https://storybook.js.org/docs/writing-tests/accessibility-testing) runs real axe-core checks per story.
 
 Published automatically to GitHub Pages on every push to `main` by the **Storybook** GitHub Action.
+
+## Flows
+
+Every component so far had only been verified in isolation (Playground, Storybook). `src/flows/SubmitClaim/` composes several of them into a real walk-through — `PetSelector` → `DocumentCard` → `CameraModule` → `ValidationMessage` → `EstimateCard` → `ClaimStatusStepper` — to show the layout/spacing/state-progression skill that building one component well doesn't cover. It's deliberately not a component: no new design-system surface, just existing components arranged on mock phone-screen frames, with static props (same spirit as Playground). Lives under **Flows** in the Storybook sidebar, above **Components**, not inside `src/components/`.
 
 ## Testing
 

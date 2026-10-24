@@ -31,6 +31,7 @@ build/json/tokens.json Flat JSON of the default build (for JS / React Native)
 src/
   components/<Name>/     One folder per component: <Name>.tsx, <Name>.module.css, index.ts, <Name>.stories.tsx, <Name>.figma.ts, optionally <Name>.test.tsx
   components/index.ts    Re-exports every component
+  flows/<Name>/           Composed multi-screen walk-throughs built from existing components (same file layout as components, minus .figma.ts) — see "Flows" below
   playground/            Playground.tsx — renders every component/variant for manual QA
   styles/global.css      Resets + font-smoothing only; component styles live in their module.css
   test/setup.ts          jest-dom matchers + RTL cleanup, loaded by the `unit` Vitest project (see "Testing" below)
@@ -163,6 +164,16 @@ Stack is decided: React + Vite, CSS Modules. Don't re-ask the user — follow `s
   - Instance swap `Icon` → `icon?: LucideIcon` for Feather-sourced icons, or `icon?: React.FC<React.SVGProps<SVGSVGElement>>` for an exported Streamline Flex SVG (see "Icons")
 - Style only with token variables. No inline hex/px, no Tailwind-style utility values.
 - Add every new component's states to `src/playground/Playground.tsx` so they're visible for manual QA (light/dark × default/large text), and to a colocated `<Name>.stories.tsx` with `tags: ['autodocs']` (see "Storybook" below) — same states in both, they're not substitutes for each other.
+
+## Flows
+
+A flow is a composed multi-screen walk-through built entirely from already-shipped components (e.g. `src/flows/SubmitClaim/` — `PetSelector` → `DocumentCard` → `CameraModule` → `ValidationMessage` → `EstimateCard` → `ClaimStatusStepper`), demonstrating real screen layout and state progression in a way no single component's Storybook page can. A flow is not a component:
+
+- Lives in `src/flows/<Name>/`, never `src/components/` — it doesn't ship a new design-system surface, just arranges existing ones.
+- No `.figma.ts` (nothing new to map to Figma) and no Playground entry (Playground is for component variants, not compositions).
+- Static props only, same spirit as Playground — not required to be interactive/stateful beyond what demonstrates the composition.
+- Still gets a colocated `<Name>.stories.tsx` with `tags: ['autodocs']`, under a top-level `title: 'Flows/<name>'` (not `'Components/...'`) so it sits in its own Storybook sidebar section — see `.storybook/preview.tsx`'s `storySort.order`.
+- Still verified in light/dark × default/large text, same as a component — composing CameraModule into a real screen for the first time is exactly how a dark-mode-only color-contrast bug in its `--text-inverse` usage got caught (fixed to `--text-on-brand`, see that component's CSS); check all 4 combinations, don't just trust the pieces because they passed individually.
 
 ## Storybook
 

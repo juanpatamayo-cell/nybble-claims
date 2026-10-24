@@ -24,7 +24,16 @@
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-text-md);
   line-height: var(--line-height-text-md);
-  color: var(--text-inverse);
+  /*
+   * --text-inverse flips with the app theme (white in light mode,
+   * near-black in dark — see build/css/theme-dark.css), but this overlay's
+   * background (--bg-overlay) is pure black in both themes. In dark mode
+   * that combination failed axe's color-contrast check (1.2:1, needs
+   * 4.5:1) — caught composing this into a real screen in #44. --text-on-brand
+   * stays white in both themes, matching .framingGuide/.shutter's existing
+   * --fg-on-brand usage for the same always-dark overlay.
+   */
+  color: var(--text-on-brand);
 }
 
 .framingGuide {
@@ -59,7 +68,9 @@
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-text-sm);
   line-height: var(--line-height-text-sm);
-  color: var(--text-inverse);
+  /* Same fix as .instruction above — --text-on-brand instead of the
+     theme-flipping --text-inverse, for this always-dark overlay. */
+  color: var(--text-on-brand);
 }
 
 .shutter {
