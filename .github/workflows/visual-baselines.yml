@@ -15,17 +15,6 @@ name: Regenerate visual baselines
 # workflow never commits on its own.
 on:
   workflow_dispatch:
-  # TEMPORARY, remove before merging: workflow_dispatch can't target a
-  # workflow file that only exists on a branch, not yet on `main` — GitHub
-  # has to index it from the default branch first. Bootstrapping this PR's
-  # very first baseline set needs a trigger that works from the branch
-  # itself, so this runs once via the PR's own pull_request event; the
-  # baselines it produces get downloaded and committed, then this trigger
-  # is removed so the workflow goes back to manual-only.
-  pull_request:
-    paths:
-      - 'src/test/visual/**'
-      - '.github/workflows/visual-baselines.yml'
 
 jobs:
   update-baselines:
