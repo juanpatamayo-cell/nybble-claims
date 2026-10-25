@@ -9,3 +9,7 @@ dist/
 
 *storybook.log
 storybook-static
+
+# Transient actual/diff images from a failed toMatchScreenshot run — only
+# the accepted baselines in src/test/visual/__screenshots__/ are committed.
+.vitest/

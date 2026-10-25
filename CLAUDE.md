@@ -35,13 +35,15 @@ src/
   playground/            Playground.tsx — renders every component/variant for manual QA
   styles/global.css      Resets + font-smoothing only; component styles live in their module.css
   test/setup.ts          jest-dom matchers + RTL cleanup, loaded by the `unit` Vitest project (see "Testing" below)
+  test/visual/           AllStories.visual.test.tsx + its committed __screenshots__/ baselines (see "Visual regression" below)
   main.tsx               Loads the three token stylesheets + fonts, mounts Playground
 .storybook/             main.ts (addons), preview.tsx (token/font imports, theme+text-size toolbar globals)
 figma.config.json       Code Connect CLI config (parser, include glob). Not usable until the Library file is on an Org/Enterprise Figma plan — see README's "Code Connect" section.
-.github/workflows/tokens.yml      CI: rebuilds tokens and fails if build/ is stale
-.github/workflows/storybook.yml   CI: builds Storybook on every push/PR, deploys to Pages from main
+.github/workflows/tokens.yml             CI: rebuilds tokens and fails if build/ is stale
+.github/workflows/storybook.yml          CI: builds Storybook on every push/PR, deploys to Pages from main
+.github/workflows/visual-baselines.yml   Manual-only: regenerates src/test/visual/__screenshots__/ on ubuntu-latest (see "Visual regression" below — never generate these locally)
 .github/workflows/ci.yml          CI: typecheck, lint, format:check, build, unit tests (npm run test), and Storybook a11y checks (npm run test:a11y) on every push/PR
-vite.config.ts          Vite config + two Vitest projects: `unit` (jsdom + RTL, test:a11y's sibling — see "Testing" below) and `storybook` (addon-vitest, Playwright/Chromium) that test:a11y runs
+vite.config.ts          Vite config + three Vitest projects: `unit` (jsdom + RTL, see "Testing"), `storybook` (addon-vitest, Playwright/Chromium, test:a11y runs this), `visual` (Playwright/Chromium + toMatchScreenshot, see "Visual regression")
 eslint.config.js        Flat ESLint config (typescript-eslint + react-hooks + react-refresh), deferring formatting to Prettier
 .prettierrc.json / .prettierignore   Prettier config — see "Linting and formatting" below
 ```
@@ -192,6 +194,17 @@ Storybook (above) and this section cover two different things and shouldn't be c
 - `src/test/setup.ts` is the `unit` project's `setupFiles` entry: it extends Vitest's `expect` with `@testing-library/jest-dom`'s matchers and manually wires React Testing Library's `cleanup` into `afterEach` (the project uses explicit `vitest` imports rather than `globals: true`, so RTL's own auto-cleanup detection doesn't fire — without this, leftover DOM from one test leaks into the next in the same file).
 - Not every component needs a test file — add one when a component has real branching logic to break (conditional rendering per variant/state, a derived/clamped value, a callback that must fire with the right argument). A component that's pure markup plus token styling doesn't need one just to pad coverage.
 - Current coverage: `DocumentCard` (progress clamping, state branching, action callbacks), `ClaimStatusStepper` (which steps render per `status`), `EstimateCard` (full vs. compact breakdown/footnote rendering, info-button callback).
+
+## Visual regression
+
+A third thing, distinct from both Storybook (docs/a11y) and the unit tests above: catches an unintended pixel-level change (e.g. a token edit that shifts spacing somewhere nobody thought to check manually) that neither of those is built to catch.
+
+- `npm run test:visual` (`vitest run --project=visual`) renders every `Components/*` story via Storybook's [portable stories](https://storybook.js.org/docs/api/portable-stories-vitest) (`composeStories`, from `@storybook/react-vite`) in a real Chromium browser and compares it against a committed baseline PNG with Vitest's built-in `toMatchScreenshot` matcher — `src/test/visual/AllStories.visual.test.tsx`. Light and dark only (not text-size — that axis is still only checked manually, per the Theming section). Required in CI.
+- **Deliberately scoped to `src/components/`, not `src/flows/`.** `SubmitClaimFlow`'s page renders correctly in an actual browser (verified manually for #44) but came back from `toMatchScreenshot` with a large blank region past the first of its 6 stacked mock screens — read as a boundary case in this still-`@experimental` Vitest matcher with a very tall (~5000px) subtree, not a real component bug. Revisit if a future Vitest release fixes it; don't silently paper over it by cropping or restructuring the flow page just to make the matcher happy.
+- **Baselines must be generated on the same OS that verifies them** (`ubuntu-latest`, same as `ci.yml`) — font rasterization differs enough between operating systems that a baseline captured on a contributor's own Mac will cause false failures once CI compares against it. Never generate baselines locally and commit them directly. Instead, run `.github/workflows/visual-baselines.yml` (`workflow_dispatch`, manual-only) — it runs the same `vitest run --project=visual --update=new` on `ubuntu-latest` and uploads the result as a `visual-baselines` build artifact; download that and commit its contents to `src/test/visual/__screenshots__/`.
+- Run this whenever a story is added, or an intentional visual change is made to an existing one — the same "new baseline" workflow either way.
+- Two real flakes this caught building the suite, both already fixed in the test file itself (see its comments) — worth knowing if `toMatchScreenshot` ever looks flaky again: (1) screenshotting before `document.fonts.ready` resolves captures the fallback font's layout, which reflows once the real font swaps in; (2) `toMatchScreenshot`'s name must be unique **across the whole test file**, not just within one `describe` — several components reuse story names like "Default" or "Error", and without a per-component prefix their screenshots silently overwrite each other on disk and get compared against the wrong component.
+- On failure, CI uploads the actual/diff images as a `visual-diff` build artifact (`ci.yml`) so a reviewer can see what changed without pulling the branch and running it locally.
 
 ## Icons
 

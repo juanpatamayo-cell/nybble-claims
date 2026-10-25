@@ -2,12 +2,15 @@ name: CI
 
 # Runs on every push/PR to main: typecheck, lint (ESLint) + format check
 # (Prettier), build the app, component unit tests (Vitest + React Testing
-# Library, jsdom — the "unit" project in vite.config.ts), and the Storybook
+# Library, jsdom — the "unit" project in vite.config.ts), the Storybook
 # accessibility checks (axe, via @storybook/addon-vitest + @storybook/addon-a11y
-# — see .storybook/preview.tsx's `a11y.test` parameter, set to 'error'). This
-# is the gate storybook.yml's own build job doesn't cover — it only runs
-# `build-storybook`, a separate Vite config that doesn't catch every
-# app-level TypeScript error.
+# — see .storybook/preview.tsx's `a11y.test` parameter, set to 'error'), and
+# visual regression (Vitest's built-in toMatchScreenshot, against the
+# baselines in src/test/visual/__screenshots__/ — see CLAUDE.md's "Visual
+# regression" section and .github/workflows/visual-baselines.yml for how
+# those baselines get (re)generated). This is the gate storybook.yml's own
+# build job doesn't cover — it only runs `build-storybook`, a separate Vite
+# config that doesn't catch every app-level TypeScript error.
 on:
   push:
     branches: [main]
@@ -31,3 +34,11 @@ jobs:
       - run: npm run test
       - run: npx playwright install --with-deps chromium
       - run: npm run test:a11y
+      - run: npm run test:visual
+      - name: Upload visual diff on failure
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-diff
+          path: .vitest/attachments/
+          retention-days: 14
