@@ -13,3 +13,11 @@ storybook-static
 # Transient actual/diff images from a failed toMatchScreenshot run — only
 # the accepted baselines in src/test/visual/__screenshots__/ are committed.
 .vitest/
+
+# toMatchScreenshot auto-writes a reference for any screenshot that doesn't
+# have one yet, on any run — not just `--update` — so running npm run
+# test:visual locally (e.g. on macOS) silently creates *-darwin.png
+# baselines next to the committed *-linux.png ones. Only the latter are
+# ever generated intentionally (via visual-baselines.yml, on ubuntu-latest
+# — see CLAUDE.md's "Visual regression" section); never commit the former.
+src/test/visual/__screenshots__/**/*-darwin.png

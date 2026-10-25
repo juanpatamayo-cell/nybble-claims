@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import {
   ActionBar,
   AppBar,
@@ -67,7 +67,16 @@ const breakdown = [
  * Playground: this isn't a new component, just a composition demo, so it
  * lives in src/flows/ instead of src/components/.
  */
+type PetId = 'luna' | 'max';
+
 export function SubmitClaimFlow() {
+  // The only screen with real interactivity — the rest stay static props
+  // (CLAUDE.md's Flows section: "not required to be interactive/stateful
+  // beyond what's needed to demonstrate the composition"). This one is a
+  // small, self-contained useState example: picking a pet is a real choice
+  // a user makes, not just a display variant.
+  const [selectedPet, setSelectedPet] = useState<PetId>('luna');
+
   return (
     <div className={styles.page}>
       <h1 className={styles.pageTitle}>Submit a claim</h1>
@@ -92,14 +101,16 @@ export function SubmitClaimFlow() {
               role="group" groups them without that requirement. */}
           <div role="group" aria-label="Choose a pet" className={styles.stack}>
             <PetSelector
-              state="selected"
+              state={selectedPet === 'luna' ? 'selected' : 'default'}
               name="Luna"
               detail="Beagle · 4 years · Policy ending 8821"
+              onSelect={() => setSelectedPet('luna')}
             />
             <PetSelector
-              state="default"
+              state={selectedPet === 'max' ? 'selected' : 'default'}
               name="Max"
               detail="Tabby cat · 2 years · Policy ending 8821"
+              onSelect={() => setSelectedPet('max')}
             />
           </div>
         </Screen>
@@ -175,7 +186,7 @@ export function SubmitClaimFlow() {
           <ClaimHeader
             status="in-review"
             title="Vet visit — Happy Paws Clinic"
-            subtitle="Luna · Claim NB-20418 · Sep 12"
+            subtitle={`${selectedPet === 'luna' ? 'Luna' : 'Max'} · Claim NB-20418 · Sep 12`}
           />
           <ClaimStatusStepper
             status="in-review"
