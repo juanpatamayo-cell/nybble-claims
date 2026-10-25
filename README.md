@@ -105,7 +105,9 @@ Published automatically to GitHub Pages on every push to `main` by the **Storybo
 
 ## Flows
 
-Every component so far had only been verified in isolation (Playground, Storybook). `src/flows/SubmitClaim/` composes several of them into a real walk-through — `PetSelector` → `DocumentCard` → `CameraModule` → `ValidationMessage` → `EstimateCard` → `ClaimStatusStepper` — to show the layout/spacing/state-progression skill that building one component well doesn't cover. It's deliberately not a component: no new design-system surface, just existing components arranged on mock phone-screen frames, with static props (same spirit as Playground). Lives under **Flows** in the Storybook sidebar, above **Components**, not inside `src/components/`.
+Every component so far had only been verified in isolation (Playground, Storybook). `src/flows/SubmitClaim/` composes several of them into a real walk-through — `PetSelector` → `DocumentCard` → `CameraModule` → `ValidationMessage` → `EstimateCard` → `ClaimStatusStepper` — to show the layout/spacing/state-progression skill that building one component well doesn't cover. It's deliberately not a component: no new design-system surface, just existing components arranged on mock phone-screen frames. Lives under **Flows** in the Storybook sidebar, above **Components**, not inside `src/components/`.
+
+Mostly static props (same spirit as Playground), with one real `useState` example: picking a pet on screen 1 actually updates which card looks selected, and flows through to screen 6's claim header — see the `SelectingAPetUpdatesTheFlow` story's `play` function for a test of that behavior.
 
 ## Testing
 
