@@ -158,3 +158,4 @@ All of the Library file's claims/mobile-shell components now have a matching Rea
 - [x] **M4** — iterate on design-review feedback (ValidationMessage icon sync, #17 and #18)
 - [x] **v0.1** — [tagged](https://github.com/juanpatamayo-cell/nybble-claims/releases/tag/v0.1): full component set, Storybook published
 - [x] **v1.0** — [tagged](https://github.com/juanpatamayo-cell/nybble-claims/releases/tag/v1.0): design-review feedback addressed, Code Connect templates written
+- [x] **v1.1** — [tagged](https://github.com/juanpatamayo-cell/nybble-claims/releases/tag/v1.1.0): 8 more components (mobile shell + claims), unit/interaction tests, Storybook a11y gated in CI, visual regression testing, a composed end-to-end flow
