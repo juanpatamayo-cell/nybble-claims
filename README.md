@@ -99,6 +99,8 @@ npm run build-storybook   # static export to storybook-static/
 
 Every component has a `.stories.tsx` colocated next to it, with `tags: ['autodocs']` so Storybook generates a props-table docs page from the same JSDoc comments used in the component source — no separate documentation to keep in sync. The toolbar has **Theme** (light/dark) and **Text size** (default/large) globals that set `data-theme`/`data-text-size` on `<html>`, mirroring the Playground's toggle buttons, so every story is checkable in all 4 combinations. [`@storybook/addon-a11y`](https://storybook.js.org/docs/writing-tests/accessibility-testing) runs real axe-core checks per story.
 
+Some stories also have a `play` function — a simulated interaction (click, type) with an assertion on the result, e.g. `PetSelector`'s `ClickFiresOnSelect` story clicking the card and checking `onSelect` fired. Storybook's own UI shows these step-by-step in an **Interactions** panel; `npm run test:a11y` runs them too, as part of that story's test.
+
 Published automatically to GitHub Pages on every push to `main` by the **Storybook** GitHub Action.
 
 ## Flows
